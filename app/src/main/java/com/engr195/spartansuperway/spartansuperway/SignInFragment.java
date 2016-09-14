@@ -1,4 +1,6 @@
 package com.engr195.spartansuperway.spartansuperway;
 
-public class SignInFragment {
+import android.support.v4.app.Fragment;
+
+public class SignInFragment extends Fragment {
 }
