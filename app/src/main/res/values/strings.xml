@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">Spartan Superway</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
+
+    <string name="email_label_text_view">Email</string>
+    <string name="password_label_text_view">Password</string>
+    <string name="email_text_field_hint">example@email.com</string>
+    <string name="password_text_field_hint">Password</string>
+    <string name="sign_in_button">Sign In</string>
+    <string name="sign_up_account_text_view">Don\'t have an account? Sign up now.</string>
+
 </resources>
