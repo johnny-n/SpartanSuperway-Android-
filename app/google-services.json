@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "630531468253",
+    "firebase_url": "https://spartan-superway.firebaseio.com",
+    "project_id": "spartan-superway",
+    "storage_bucket": "spartan-superway.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:630531468253:android:8d6c75c1d6c29410",
+        "android_client_info": {
+          "package_name": "com.engr195.spartansuperway.spartansuperway"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "630531468253-6mkr43dnpe5lrcdngvnttk4lt2mnl4t1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.engr195.spartansuperway.spartansuperway",
+            "certificate_hash": "4C325080A365736843ED3C9FCE67DD6911386012"
+          }
+        },
+        {
+          "client_id": "630531468253-oaoj7tcuotqjnuapb17kg4rk7ss1ct1g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsmBnXkqIub1cT1UoZopG-FFsfL_dmHEA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "630531468253-f7tij14jobf8uktgufh57rcvu96n4agi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.spartansuperway.ios"
+              }
+            },
+            {
+              "client_id": "630531468253-oaoj7tcuotqjnuapb17kg4rk7ss1ct1g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -4,6 +4,68 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+    <TextView
+        android:text="@string/first_name_label_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
+    <EditText
+        android:id="@+id/firstNameField"
+        android:hint="@string/first_name_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="@string/last_name_label_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/lastNameField"
+        android:hint="@string/last_name_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="@string/email_label_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/emailField"
+        android:hint="@string/email_text_field_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"/>
+
+    <TextView
+        android:text="@string/password_label_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/passwordField"
+        android:hint="@string/password_text_field_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"/>
+
+    <TextView
+        android:text="@string/password_confirm_label_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/passwordConfirmField"
+        android:hint="@string/password_confirm_text_field_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"/>
+
+    <Button
+        android:id="@+id/createAccountButton"
+        android:text="@string/sign_up_create_account_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
