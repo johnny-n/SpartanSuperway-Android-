@@ -2,23 +2,26 @@ package com.engr195.spartansuperway.spartansuperway
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.engr195.spartansuperway.spartansuperway.util.FirebaseAccount
 import com.engr195.spartansuperway.spartansuperway.util.showToast
-import com.firebase.client.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 
 class SignUpFragment: Fragment() {
+
+    val className = this@SignUpFragment.javaClass.name
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
             inflater.inflate(R.layout.fragment_sign_up, container, false)
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val firebaseRef = Firebase("https://spartan-superway.firebaseio.com/")
         // TODO: Add error validation text (eg. retryTextField)
 
         // TODO: Check for internet connection
@@ -27,7 +30,7 @@ class SignUpFragment: Fragment() {
 
     private fun createFirebaseAccount() {
 
-        if (!isValidForm()) return
+//        if (!isValidForm()) return
 
         val firebaseAccount = FirebaseAccount(
                 firstNameField.text.toString(),
@@ -36,18 +39,28 @@ class SignUpFragment: Fragment() {
                 passwordField.text.toString()
         )
 
-        val firebaseRef = Firebase("https://spartan-superway.firebaseio.com/accounts")
-//        firebaseRef.push().setValue(firebaseAccount)
-        
+        val auth = FirebaseAuth.getInstance()
+        auth.addAuthStateListener {
+            val userProfile = UserProfileChangeRequest.Builder()
+                    .setDisplayName("${firebaseAccount.firstName} ${firebaseAccount.lastName}")
+                    .build()
+            auth.currentUser?.updateProfile(userProfile)
+        }
 
-        context.showToast("Account created!")
+        auth.createUserWithEmailAndPassword(firebaseAccount.email, firebaseAccount.password)
+            .addOnCompleteListener(activity, { task ->
+                Log.d(className, "createUserWithEmail:onComplete:" + task.isSuccessful());
+                Log.d("Reason", task.result.toString())
+            })
+
         fragmentManager.popBackStack()
+        context.showToast("Successfully created account!")
     }
 
     private fun isValidForm(): Boolean {
         val firstNameValid = firstNameField.text.toString().length > 0
         val lastNameValid = lastNameField.text.toString().length > 0
-        return if (firstNameValid &&  lastNameValid && passwordsMatch() && isValidForm()) {
+        return if (firstNameValid &&  lastNameValid && passwordsMatch()) {
             true
         } else {
             context.showToast("Please enter all fields correctly")
