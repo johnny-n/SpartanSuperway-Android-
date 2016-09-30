@@ -22,12 +22,13 @@ class SignUpFragment: Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // TODO: Add error validation text (eg. retryTextField)
 
         // TODO: Check for internet connection
         createAccountButton.setOnClickListener { createFirebaseAccount() }
     }
 
+    // TODO: Properly handle field validations
+    // TODO: Add field validation text (eg. "password & passwordConfirm do not match")
     private fun createFirebaseAccount() {
 
 //        if (!isValidForm()) return
@@ -50,7 +51,6 @@ class SignUpFragment: Fragment() {
         auth.createUserWithEmailAndPassword(firebaseAccount.email, firebaseAccount.password)
             .addOnCompleteListener(activity, { task ->
                 Log.d(className, "createUserWithEmail:onComplete:" + task.isSuccessful());
-                Log.d("Reason", task.result.toString())
             })
 
         fragmentManager.popBackStack()
