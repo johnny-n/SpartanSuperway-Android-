@@ -19,4 +19,19 @@
     <string name="sign_up_account_text_view">Don\'t have an account? Sign up now.</string>
     <string name="sign_up_create_account_button">Create Account</string>
 
+    <!-- MainFragment -->
+    <string name="order_pod_button_text">Order pod</string>
+    <string name="card_type_label">Card type</string>
+    <string name="card_type_hint">Visa/Mastercard</string>
+    <string name="cardholder_name_label">Cardholder\'s name</string>
+    <string name="cardholder_name_hint">Billy Bob</string>
+    <string name="card_number_label">Card number</string>
+    <string name="card_number_hint">xxxx-xxxx-xxxx-xxxx</string>
+    <string name="card_expiration_date_lable">Expiration date</string>
+    <string name="card_expiration_date_hint">mm-yy</string>
+    <string name="card_cvc_number_label">CVC #</string>
+    <string name="card_cvc_number_hint">xxx</string>
+    <string name="submit_form_button">Submit</string>
+
+
 </resources>

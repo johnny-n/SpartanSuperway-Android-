@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"/>
 
     <EditText
-        android:id="@+id/emailEditText"
+        android:id="@+id/emailField"
         android:hint="@string/email_text_field_hint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"/>
 
     <EditText
-        android:id="@+id/passwordEditText"
+        android:id="@+id/passwordField"
         android:hint="@string/password_text_field_hint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

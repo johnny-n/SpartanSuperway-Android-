@@ -1,4 +1,4 @@
-package com.engr195.spartansuperway.spartansuperway.util
+package com.engr195.spartansuperway.spartansuperway.utils
 
 import android.content.Context
 import android.widget.Toast

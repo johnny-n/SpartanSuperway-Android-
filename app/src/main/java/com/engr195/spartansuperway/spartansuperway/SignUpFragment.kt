@@ -7,13 +7,13 @@ import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.engr195.spartansuperway.spartansuperway.util.FirebaseAccount
-import com.engr195.spartansuperway.spartansuperway.util.showToast
+import com.engr195.spartansuperway.spartansuperway.utils.FirebaseAccount
+import com.engr195.spartansuperway.spartansuperway.utils.showToast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 
-class SignUpFragment: Fragment() {
+class SignUpFragment : Fragment() {
 
     val className = this@SignUpFragment.javaClass.name
 

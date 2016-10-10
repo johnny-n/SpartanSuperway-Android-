@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/paymentForm"
+              tools:showIn="@layout/fragment_main"
+              android:background="@color/colorNeutral"
+              android:padding="16dp"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <TextView
+        android:text="@string/card_type_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:hint="@string/card_type_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/PaymentFormEditText"/>
+
+    <TextView
+        android:text="@string/cardholder_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:hint="@string/cardholder_name_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/PaymentFormEditText"/>
+
+    <TextView
+        android:text="@string/card_number_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:hint="@string/card_number_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/PaymentFormEditText"/>
+
+    <TextView
+        android:text="@string/card_expiration_date_lable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:hint="@string/card_expiration_date_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/PaymentFormEditText"/>
+
+    <TextView
+        android:text="@string/card_cvc_number_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:hint="@string/card_cvc_number_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/PaymentFormEditText"/>
+
+    <Button
+        android:id="@+id/submitFormButton"
+        android:text="@string/submit_form_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
