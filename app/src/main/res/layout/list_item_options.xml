@@ -6,6 +6,8 @@
 
     <TextView
         android:id="@+id/optionText"
+        android:gravity="center"
+        android:text="test"
         android:background="@drawable/circle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

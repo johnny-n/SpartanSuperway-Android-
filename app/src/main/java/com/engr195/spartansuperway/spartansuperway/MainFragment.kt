@@ -7,8 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.android.synthetic.main.payment_page.*
+import kotlinx.android.synthetic.main.dialog_payment.*
 
+// TODO: Remove this fragment?
 class MainFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =

@@ -1,5 +1,6 @@
 package com.engr195.spartansuperway.spartansuperway
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -14,16 +15,6 @@ class SignInFragment : Fragment() {
 
     lateinit var parentActivity: MainActivity
     val auth = FirebaseAuth.getInstance()
-    val authListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
-        val user = firebaseAuth.currentUser
-        val logMessage = if (user != null) {
-            "onAuthStateChanged:signed_in:${user.uid}"
-
-        } else {
-            "onAuthStateChanged:signed_out"
-        }
-        Log.d(tag, logMessage)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,26 +33,20 @@ class SignInFragment : Fragment() {
             parentActivity.replaceFragment(signUpFragment, true)
         }
 
-        val email = emailField.text.toString()
-        val password = passwordField.text.toString()
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(parentActivity) { taskResult ->
-                Log.d(tag, "signInWithEmail:onComplete:${taskResult.isSuccessful}")
-                // If sign in fails, display message to user.
-                if (!taskResult.isSuccessful) {
-                    Log.w(tag, "signInEmail:failed", taskResult.exception)
-                    context.showToast("Incorrect email and/or password.")
-                }
-            }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        auth.addAuthStateListener(authListener)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        auth.addAuthStateListener(authListener)
+        signInButton.setOnClickListener { view ->
+            val email = emailField.text.toString()
+            val password = passwordField.text.toString()
+            auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(parentActivity) { taskResult ->
+                        if (taskResult.isSuccessful) {
+                            Log.d(tag, "signInWithEmail:onComplete:${taskResult.isSuccessful}")
+                            val intent = Intent(activity, EtaActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            Log.w(tag, "signInEmail:failed", taskResult.exception)
+                            context.showToast("Incorrect email and/or password.")
+                        }
+                    }
+        }
     }
 }
