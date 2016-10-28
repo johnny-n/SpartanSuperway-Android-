@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/circle_shaped_filled"/>
+    <item android:drawable="@drawable/ic_tags_white"
+          android:top="@dimen/drawable_icon_padding"
+          android:bottom="@dimen/drawable_icon_padding"
+          android:left="@dimen/drawable_icon_padding"
+          android:right="@dimen/drawable_icon_padding"/>
+</layer-list>

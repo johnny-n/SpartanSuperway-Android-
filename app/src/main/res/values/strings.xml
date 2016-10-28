@@ -20,7 +20,9 @@
     <string name="sign_up_create_account_button">Create Account</string>
 
     <!-- MainFragment -->
-    <string name="order_pod_button_text">Order pod</string>
+    <string name="eta_button_text">Estimated time arrival...</string>
+    <string name="purchase_ticket_button_text">Purchase Ticket</string>
+    <string name="view_tickets_button_text">View Tickets</string>
     <string name="card_type_label">Card type</string>
     <string name="card_type_hint">Visa/Mastercard</string>
     <string name="cardholder_name_label">Cardholder\'s name</string>
@@ -33,5 +35,6 @@
     <string name="card_cvc_number_hint">xxx</string>
     <string name="submit_form_button">Submit</string>
 
+    <string name="transition_test">transition_test</string>
 
 </resources>

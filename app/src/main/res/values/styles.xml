@@ -15,6 +15,16 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="MainScreenTheme" parent="AppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/darkNeutralBackground</item>
+    </style>
+
+    <style name="MainScreenBottomOptions">
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
     <style name="PaymentFormEditText" parent="AppTheme">
         <item name="android:background">@color/white</item>
         <item name="android:layout_marginBottom">10dp</item>

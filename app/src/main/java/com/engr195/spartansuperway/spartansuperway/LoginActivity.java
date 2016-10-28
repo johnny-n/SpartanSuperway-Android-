@@ -9,12 +9,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         // Important call to set up Firebase
 
         // TODO: -- Non-default stuff below --

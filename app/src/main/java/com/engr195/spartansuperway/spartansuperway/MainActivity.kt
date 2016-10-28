@@ -2,40 +2,44 @@ package com.engr195.spartansuperway.spartansuperway
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_eta.*
-import java.util.*
+import kotlinx.android.synthetic.main.activity_main.*
 
-class EtaActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     companion object {
-        val optionsMap = HashMap<Int, String>()
+        val optionsMap = SparseArray<String>()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_eta)
+        setContentView(R.layout.activity_main)
 
-        // TODO: Remove this later
-        optionsMap.put(1, "Option1")
-        optionsMap.put(2, "Option2")
-        optionsMap.put(3, "Option3")
-        optionsMap.put(4, "Option4")
-        optionsMap.put(5, "Option5")
-        optionsMap.put(6, "Option6")
+        // RecyclerView stuff
+//        optionsMap.put(1, "Purchase Ticket")
+//        optionsMap.put(2, "View Tickets")
+//        optionsMap.put(3, "Map")
+//        optionsMap.put(4, "Option4")
+//        optionsMap.put(5, "Option5")
+//        optionsMap.put(6, "Option6")
+//        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+//        recyclerView.adapter = OptionsAdapter()
 
-        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        recyclerView.adapter = OptionsAdapter()
 
-        etaTime.setOnClickListener {
-            val payment = PaymentFragment()
-            payment.show(supportFragmentManager, "EtaActivity.class")
-        }
+
+//        etaTime.setOnClickListener {
+//            val payment = PaymentFragment()
+//            payment.show(supportFragmentManager, "EtaActivity.class")
+//        }
+    }
+
+    inline fun <T> with(receiver: T, block: T.() -> Unit) {
+        receiver.block()
     }
 
     private inner class OptionsAdapter : RecyclerView.Adapter<OptionsViewHolder>() {
@@ -51,9 +55,10 @@ class EtaActivity : AppCompatActivity() {
             holder?.setOptionText(text)
         }
 
-        override fun getItemCount(): Int = optionsMap.size
+        override fun getItemCount(): Int = optionsMap.size()
 
     }
+
     private inner class OptionsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val optionText: TextView

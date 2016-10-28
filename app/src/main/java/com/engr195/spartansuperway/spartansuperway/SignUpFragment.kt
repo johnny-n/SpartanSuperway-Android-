@@ -11,6 +11,7 @@ import com.engr195.spartansuperway.spartansuperway.utils.FirebaseAccount
 import com.engr195.spartansuperway.spartansuperway.utils.showToast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 
 class SignUpFragment : Fragment() {
@@ -50,11 +51,22 @@ class SignUpFragment : Fragment() {
 
         auth.createUserWithEmailAndPassword(firebaseAccount.email, firebaseAccount.password)
             .addOnCompleteListener(activity, { task ->
-                Log.d(className, "createUserWithEmail:onComplete:" + task.isSuccessful());
-            })
+                Log.d(className, "createUserWithEmail:onComplete: ${task.isSuccessful}")
+                task.isSuccessful()
 
-        fragmentManager.popBackStack()
-        context.showToast("Successfully created account!")
+                val userId = FirebaseAuth.getInstance().currentUser?.uid
+                var database = FirebaseDatabase.getInstance().getReference()
+                database = database.child("users").child(userId)
+                database.child("firstName").setValue(firebaseAccount.firstName)
+                database.child("lastName").setValue(firebaseAccount.lastName)
+
+                // Return to login screen
+                fragmentManager.popBackStack()
+                context.showToast("Account successfully created!")
+            })
+            .addOnFailureListener { exception ->
+                Log.d(className, "failedToCreateUser: ${exception.message}")
+            }
     }
 
     private fun isValidForm(): Boolean {
