@@ -6,17 +6,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/etaTime"
-        android:background="@drawable/circle_shape"
-        android:text="@string/eta_button_text"
-        android:textAllCaps="false"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:layout_width="300dp"
-        android:layout_height="300dp"/>
-
     <android.support.v7.widget.CardView
         android:id="@+id/separator"
         app:cardBackgroundColor="@color/black"
@@ -26,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="5dp"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,26 +25,69 @@
         <Button
             android:id="@+id/purchaseTicketButton"
             android:background="@drawable/circle_shopping_cart"
+            android:layout_toLeftOf="@id/viewTicketsButton"
             android:layout_width="88dp"
             android:layout_height="80dp"
             style="@style/MainScreenBottomOptions"/>
+
+        <TextView
+            android:text="@string/purchase_ticket_button_text"
+            android:ems="5"
+            android:gravity="center_horizontal"
+            android:layout_below="@id/purchaseTicketButton"
+            android:layout_toLeftOf="@id/viewTicketsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <Button
             android:id="@+id/viewTicketsButton"
             android:background="@drawable/circle_tags"
+            android:layout_centerHorizontal="true"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_width="88dp"
             android:layout_height="80dp"
-            style="@style/MainScreenBottomOptions"/>
+            style="@style/MainScreenBottomOptionText"/>
+
+        <TextView
+            android:text="@string/view_tickets_button_text"
+            android:ems="5"
+            android:gravity="center_horizontal"
+            android:layout_below="@id/viewTicketsButton"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <Button
             android:id="@+id/thirdOptionButton"
             android:background="@drawable/circle_map"
+            android:layout_toRightOf="@id/viewTicketsButton"
             android:layout_width="88dp"
             android:layout_height="80dp"
-            style="@style/MainScreenBottomOptions"/>
+            style="@style/MainScreenBottomOptionText"/>
 
-    </LinearLayout>
+        <TextView
+            android:text="@string/map_bottom_text"
+            android:ems="5"
+            android:gravity="center_horizontal"
+            android:layout_below="@id/thirdOptionButton"
+            android:layout_toRightOf="@id/viewTicketsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/etaTime"
+        android:background="@drawable/circle_pod_dropoff"
+        android:text="Your pod has arrived"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:layout_marginTop="50dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

@@ -31,12 +31,13 @@ class MainActivity : AppCompatActivity() {
 //        recyclerView.adapter = OptionsAdapter()
 
 
-
 //        etaTime.setOnClickListener {
 //            val payment = PaymentFragment()
 //            payment.show(supportFragmentManager, "EtaActivity.class")
 //        }
     }
+
+    fun <A, B, C> with(a: A, b: B, f: (A, B) -> C) = f(a, b)
 
     inline fun <T> with(receiver: T, block: T.() -> Unit) {
         receiver.block()
@@ -56,7 +57,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun getItemCount(): Int = optionsMap.size()
-
     }
 
     private inner class OptionsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

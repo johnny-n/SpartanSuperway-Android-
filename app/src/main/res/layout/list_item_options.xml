@@ -8,7 +8,7 @@
         android:id="@+id/optionText"
         android:gravity="center"
         android:text="test"
-        android:background="@drawable/circle_shape"
+        android:background="@drawable/circle_eta"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

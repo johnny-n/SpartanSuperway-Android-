@@ -2,6 +2,7 @@ package com.engr195.spartansuperway.spartansuperway
 
 import android.graphics.Point
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.transition.TransitionManager
 import android.util.Log
@@ -66,6 +67,18 @@ class PaymentActivity: AppCompatActivity() {
         }.withEndAction {
             frame.startAnimation(translateAnimation)
         }.start()
+    }
+
+    /**
+     * @param addToBackStack set to true if you want the "back" button to reverse this action
+     *                       (adding the transaction to the back stack)
+     */
+    fun replaceFragment(fragment: Fragment, addToBackStack: Boolean) {
+        val transaction = supportFragmentManager.beginTransaction()
+        if (addToBackStack) {
+            transaction.addToBackStack(null)
+        }
+        transaction.replace(R.id.fragment_container, fragment).commit()
     }
 
 }

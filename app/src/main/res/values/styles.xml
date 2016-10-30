@@ -20,10 +20,11 @@
         <item name="android:windowBackground">@color/darkNeutralBackground</item>
     </style>
 
-    <style name="MainScreenBottomOptions">
+    <style name="MainScreenBottomOptionText">
         <item name="android:textSize">16sp</item>
-        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center_horizontal</item>
     </style>
+
 
     <style name="PaymentFormEditText" parent="AppTheme">
         <item name="android:background">@color/white</item>
