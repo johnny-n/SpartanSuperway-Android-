@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:background="@color/colorNeutral"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+    <Button
+        android:id="@+id/etaTime"
+        android:background="@drawable/circle_pod_dropoff"
+        android:text="Your pod has arrived"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:layout_marginTop="15dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
 
     <android.support.v7.widget.CardView
         android:id="@+id/separator"
@@ -27,8 +40,7 @@
             android:background="@drawable/circle_shopping_cart"
             android:layout_toLeftOf="@id/viewTicketsButton"
             android:layout_width="88dp"
-            android:layout_height="80dp"
-            style="@style/MainScreenBottomOptions"/>
+            android:layout_height="80dp"/>
 
         <TextView
             android:text="@string/purchase_ticket_button_text"
@@ -46,8 +58,7 @@
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_width="88dp"
-            android:layout_height="80dp"
-            style="@style/MainScreenBottomOptionText"/>
+            android:layout_height="80dp"/>
 
         <TextView
             android:text="@string/view_tickets_button_text"
@@ -63,8 +74,7 @@
             android:background="@drawable/circle_map"
             android:layout_toRightOf="@id/viewTicketsButton"
             android:layout_width="88dp"
-            android:layout_height="80dp"
-            style="@style/MainScreenBottomOptionText"/>
+            android:layout_height="80dp"/>
 
         <TextView
             android:text="@string/map_bottom_text"
@@ -77,17 +87,6 @@
 
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/etaTime"
-        android:background="@drawable/circle_pod_dropoff"
-        android:text="Your pod has arrived"
-        android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        android:layout_marginTop="50dp"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
+
 
 </RelativeLayout>

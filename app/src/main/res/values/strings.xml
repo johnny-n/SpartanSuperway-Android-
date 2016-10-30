@@ -38,4 +38,14 @@
 
     <string name="transition_test">transition_test</string>
 
+    <!-- Change later -->
+    <array name="spinner_locations">
+        <item>Alameda</item>
+        <item>Berkeley</item>
+        <item>Cupertino</item>
+        <item>Palo Alto</item>
+        <item>San Francisco</item>
+        <item>San Jose</item>
+    </array>
+
 </resources>

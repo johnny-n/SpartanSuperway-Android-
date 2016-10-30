@@ -10,7 +10,7 @@ import android.view.LayoutInflater
 class PaymentFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val paymentView = LayoutInflater.from(activity).inflate(R.layout.dialog_payment, null)
+        val paymentView = LayoutInflater.from(activity).inflate(R.layout.fragment_payment, null)
 
         return AlertDialog.Builder(context)
             .setView(paymentView)
