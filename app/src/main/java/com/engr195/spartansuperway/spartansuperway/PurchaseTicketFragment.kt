@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.engr195.spartansuperway.spartansuperway.utils.showToast
 import kotlinx.android.synthetic.main.fragment_purchase_ticket.*
+import kotlinx.android.synthetic.main.fragment_purchase_ticket.square
 
 class PurchaseTicketFragment: Fragment() {
 
@@ -36,6 +37,12 @@ class PurchaseTicketFragment: Fragment() {
                 .start()
             TransitionManager.go(ticketScene, AutoTransition())
             context.showToast("Ticket purchased!")
+
+            val okButton = square.findViewById(R.id.okButton)
+            okButton.setOnClickListener {
+                // Go back to MainActivity
+                activity.finish()
+            }
         }
     }
 }

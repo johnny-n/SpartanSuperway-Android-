@@ -101,11 +101,20 @@
                 style="@style/TicketText"/>
 
             <ImageView
+                android:id="@+id/qrCode"
                 android:src="@android:drawable/ic_dialog_info"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/toText"
                 android:layout_width="200dp"
                 android:layout_height="200dp"/>
+
+            <Button
+                android:id="@+id/okButton"
+                android:text="@android:string/ok"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/qrCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
         </RelativeLayout>
 
