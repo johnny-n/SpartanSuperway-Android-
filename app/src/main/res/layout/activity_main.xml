@@ -36,6 +36,15 @@
         android:layout_alignParentStart="true">
 
         <Button
+            android:id="@+id/viewTicketsButton"
+            android:background="@drawable/circle_tags"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_width="88dp"
+            android:layout_height="80dp"/>
+
+        <Button
             android:id="@+id/purchaseTicketButton"
             android:background="@drawable/circle_shopping_cart"
             android:layout_toLeftOf="@id/viewTicketsButton"
@@ -51,14 +60,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <Button
-            android:id="@+id/viewTicketsButton"
-            android:background="@drawable/circle_tags"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_width="88dp"
-            android:layout_height="80dp"/>
 
         <TextView
             android:text="@string/view_tickets_button_text"

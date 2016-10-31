@@ -1,127 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:background="@color/colorNeutral"
-                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/leftSide"
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:text="From: "
-            android:layout_marginBottom="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/BoldTextLabel"/>
-
-        <TextView
-            android:text="To: "
-            android:layout_marginBottom="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/BoldTextLabel"/>
-
-    </LinearLayout>
-
-
-    <Spinner
-        android:id="@+id/fromSpinner"
-        android:layout_marginBottom="20dp"
-        android:layout_alignParentRight="true"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"/>
-
-    <Spinner
-        android:id="@+id/toSpinner"
-        android:layout_below="@id/fromSpinner"
-        android:layout_marginBottom="20dp"
-        android:layout_alignParentRight="true"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"/>
-
-    <LinearLayout
-        android:id="@+id/dateAndTime"
-        android:layout_marginBottom="20dp"
-        android:layout_below="@id/leftSide"
+    <View
+        android:id="@+id/overlay"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"/>
 
-        <TextView
-            android:text="Date:"
-            android:layout_marginRight="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/BoldTextLabel"/>
-
-        <TextView
-            android:text="10/31/2016"
-            android:layout_marginRight="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:text="Time:"
-            android:layout_marginRight="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/BoldTextLabel"/>
-
-        <TextView
-            android:text="12:00PM"
-            android:layout_marginRight="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_below="@id/dateAndTime"
+    <RelativeLayout
+        android:id="@+id/paymentContainer"
+        android:padding="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:text="Allow ride sharing?"
-            android:layout_marginRight="10dp"
+        <LinearLayout
+            android:id="@+id/leftSide"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/BoldTextLabel"/>
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="From: "
+                android:layout_marginBottom="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/BoldTextLabel"/>
+
+            <TextView
+                android:text="To: "
+                android:layout_marginBottom="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/BoldTextLabel"/>
+
+        </LinearLayout>
+
+
+        <Spinner
+            android:id="@+id/fromSpinner"
+            android:layout_marginBottom="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"/>
+
+        <Spinner
+            android:id="@+id/toSpinner"
+            android:layout_below="@id/fromSpinner"
+            android:layout_marginBottom="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:id="@+id/dateAndTime"
+            android:layout_marginBottom="20dp"
+            android:layout_below="@id/leftSide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Date:"
+                android:layout_marginRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/BoldTextLabel"/>
+
+            <TextView
+                android:text="10/31/2016"
+                android:layout_marginRight="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="Time:"
+                android:layout_marginRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/BoldTextLabel"/>
+
+            <TextView
+                android:text="12:00PM"
+                android:layout_marginRight="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@id/dateAndTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Allow ride sharing?"
+                android:layout_marginRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/BoldTextLabel"/>
+
+            <TextView
+                android:text="Yes/No"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
 
         <TextView
-            android:text="Yes/No"
+            android:id="@+id/calculatedCost"
+            android:text="Calculated Cost"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="$100"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/calculatedCost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-    </LinearLayout>
 
-    <TextView
-        android:id="@+id/calculatedCost"
-        android:text="Calculated Cost"
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:text="$100"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/calculatedCost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <FrameLayout
+            android:id="@+id/square"
+            android:background="@color/colorPrimary"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-    <Button
-        android:text="Purchase"
-        android:textColor="@color/white"
-        android:background="@color/colorPrimary"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/purchaseTicketButton"
+                android:text="Purchase"
+                android:textColor="@color/white"
+                android:background="@color/colorPrimary"
+                android:layout_gravity="center"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"/>
 
+        </FrameLayout>
 
-    <fragment
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
 
 </RelativeLayout>

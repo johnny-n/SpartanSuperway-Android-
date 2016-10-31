@@ -1,5 +1,6 @@
 package com.engr195.spartansuperway.spartansuperway
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
@@ -20,21 +21,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // RecyclerView stuff
-//        optionsMap.put(1, "Purchase Ticket")
-//        optionsMap.put(2, "View Tickets")
-//        optionsMap.put(3, "Map")
-//        optionsMap.put(4, "Option4")
-//        optionsMap.put(5, "Option5")
-//        optionsMap.put(6, "Option6")
-//        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-//        recyclerView.adapter = OptionsAdapter()
-
-
-//        etaTime.setOnClickListener {
-//            val payment = PaymentFragment()
-//            payment.show(supportFragmentManager, "EtaActivity.class")
-//        }
+        purchaseTicketButton.setOnClickListener {
+            val intent = Intent(this, PaymentActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     fun <A, B, C> with(a: A, b: B, f: (A, B) -> C) = f(a, b)
