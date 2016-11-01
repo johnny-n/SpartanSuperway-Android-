@@ -8,7 +8,7 @@
                 android:layout_height="match_parent">
     <Button
         android:id="@+id/etaTime"
-        android:background="@drawable/circle_pod_dropoff"
+        android:background="@drawable/circle_pod_pickup"
         android:text="Your pod has arrived"
         android:textColor="@color/white"
         android:textAllCaps="false"
