@@ -25,38 +25,16 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, PaymentActivity::class.java)
             startActivity(intent)
         }
+
+        viewTicketsButton.setOnClickListener {
+            val intent = Intent(this, ViewTicketsActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     fun <A, B, C> with(a: A, b: B, f: (A, B) -> C) = f(a, b)
 
     inline fun <T> with(receiver: T, block: T.() -> Unit) {
         receiver.block()
-    }
-
-    private inner class OptionsAdapter : RecyclerView.Adapter<OptionsViewHolder>() {
-
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): OptionsViewHolder {
-            val inflater = LayoutInflater.from(applicationContext)
-            val view = inflater.inflate(R.layout.list_item_options, parent, false)
-            return OptionsViewHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: OptionsViewHolder?, position: Int) {
-            val text = optionsMap[position]
-            holder?.setOptionText(text)
-        }
-
-        override fun getItemCount(): Int = optionsMap.size()
-    }
-
-    private inner class OptionsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        val optionText: TextView
-
-        init { optionText = itemView.findViewById(R.id.optionText) as TextView }
-
-        fun setOptionText(text: String?) {
-            text?.let { optionText.setText(it) }
-        }
     }
 }

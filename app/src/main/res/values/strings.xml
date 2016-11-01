@@ -35,6 +35,12 @@
     <string name="card_cvc_number_label">CVC #</string>
     <string name="card_cvc_number_hint">xxx</string>
     <string name="submit_form_button">Submit</string>
+    
+    <string name="ticket_date_label">Date:</string>
+    <string name="ticket_time_label">Time:</string>
+    <string name="ticket_from_location_label">From:</string>
+    <string name="ticket_to_location_label">To:</string>
+    
 
     <string name="transition_test">transition_test</string>
 

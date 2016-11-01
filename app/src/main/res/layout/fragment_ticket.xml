@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:text="Date:"
+                    android:text="@string/ticket_date_label"
                     android:textStyle="bold"
                     android:layout_marginRight="5dp"
                     android:layout_width="wrap_content"
@@ -32,6 +32,7 @@
                     style="@style/TicketText"/>
 
                 <TextView
+                    android:id="@+id/ticketDate"
                     android:text="10/31/2016"
                     android:layout_marginRight="10dp"
                     android:layout_width="wrap_content"
@@ -39,7 +40,7 @@
                     style="@style/TicketText"/>
 
                 <TextView
-                    android:text="Time:"
+                    android:text="@string/ticket_time_label"
                     android:textStyle="bold"
                     android:layout_marginRight="5dp"
                     android:layout_width="wrap_content"
@@ -47,6 +48,7 @@
                     style="@style/TicketText"/>
 
                 <TextView
+                    android:id="@+id/ticketTime"
                     android:text="12:00PM"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -62,7 +64,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:text="From: "
+                    android:text="@string/ticket_from_location_label"
                     android:textStyle="bold"
                     android:layout_marginBottom="20dp"
                     android:layout_width="wrap_content"
@@ -70,7 +72,7 @@
                     style="@style/TicketText"/>
 
                 <TextView
-                    android:text="To: "
+                    android:text="@string/ticket_to_location_label"
                     android:textStyle="bold"
                     android:layout_marginBottom="20dp"
                     android:layout_width="wrap_content"
@@ -81,7 +83,7 @@
 
 
             <TextView
-                android:id="@+id/fromText"
+                android:id="@+id/ticketFromLocation"
                 android:text="Palo Alto"
                 android:layout_below="@id/dateAndTime"
                 android:layout_marginBottom="20dp"
@@ -91,9 +93,9 @@
                 style="@style/TicketText"/>
 
             <TextView
-                android:id="@+id/toText"
+                android:id="@+id/ticketToLocation"
                 android:text="San Francisco"
-                android:layout_below="@id/fromText"
+                android:layout_below="@id/ticketFromLocation"
                 android:layout_marginBottom="20dp"
                 android:layout_alignParentRight="true"
                 android:layout_width="200dp"
@@ -104,7 +106,7 @@
                 android:id="@+id/qrCode"
                 android:src="@android:drawable/ic_dialog_info"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@id/toText"
+                android:layout_below="@id/ticketToLocation"
                 android:layout_width="200dp"
                 android:layout_height="200dp"/>
 
@@ -119,7 +121,5 @@
         </RelativeLayout>
 
     </FrameLayout>
-
-
 
 </RelativeLayout>
