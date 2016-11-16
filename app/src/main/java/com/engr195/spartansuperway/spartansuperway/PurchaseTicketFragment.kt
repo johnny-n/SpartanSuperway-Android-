@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import com.engr195.spartansuperway.spartansuperway.utils.showToast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -33,16 +34,22 @@ class PurchaseTicketFragment : Fragment() {
             overlay.setBackgroundColor(R.color.darkNeutralBackground)
             purchaseTicketButton.visibility = View.GONE
             val ticketScene = Scene.getSceneForLayout(square, R.layout.fragment_ticket, context)
+
+            // Move button's container up (in scene that has yet to be .go() to)
             square.animate()
                     .translationY(-500f)
                     .start()
             TransitionManager.go(ticketScene, AutoTransition())
             context.showToast("Ticket purchased!")
 
+            val fromLocation = square.findViewById(R.id.ticketFromLocation) as TextView
+            val toLocation = square.findViewById(R.id.ticketToLocation) as TextView
+            fromLocation.text = fromSpinner.selectedItem.toString()
+            toLocation.text = toSpinner.selectedItem.toString()
+
             val okButton = square.findViewById(R.id.okButton)
             okButton.setOnClickListener {
                 // Go back to MainActivity
-
                 createTestTicket()
                 activity.finish()
             }
@@ -52,7 +59,7 @@ class PurchaseTicketFragment : Fragment() {
     fun createTestTicket() {
         val fromLocation = fromSpinner.selectedItem.toString()
         val toLocation = toSpinner.selectedItem.toString()
-        val eta = 5
+        val eta = 10
 
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         userId?.let {

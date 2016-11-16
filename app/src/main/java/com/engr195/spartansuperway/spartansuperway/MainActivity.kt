@@ -15,17 +15,21 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+
     companion object {
         val key_firebaseUid = "key_firebase_uid"
         val etaStatusPickup = 100       // Pod is otw to pickup user at their location
-        val etaStatusDestination = 200  // Pod is otw to user's final destination
-        val etaStatusArrival = 300      // Pod has arrived to the user's final destination
+        val etaStatusWaiting = 200      // Pod is waiting for user to get inside
+        val etaStatusDestination = 300  // Pod is otw to user's final destination
+        val etaStatusArrival = 400      // Pod has arrived to the user's final destination
         val etaStatusNoTicket = 900
     }
 
     private val tag = "MainActivity"
 
     var userId: String? = null
+    var etaAnimation: Runnable? = null
+    var animationDuration = 500L
     var pickupLocation = "pickupLocation"
     var destLocation = "destLocation"
     var statusCode = 100
@@ -51,23 +55,31 @@ class MainActivity : AppCompatActivity() {
         userId?.let { setupEtaConnection() }
         createTestTicket()
 
-        // TEST
-        repeatEtaAnimation()
+        setupEtaAnimation()
     }
 
-    // TEST
-    fun repeatEtaAnimation() {
-        etaTime.animate()
-                .setDuration(500)
-                .alpha(0.60f)
-                .withEndAction {
-                    etaTime.animate()
-                            .setDuration(500)
-                            .alpha(1.0f)
-                            .withEndAction {
-                                repeatEtaAnimation()
-                            }
-                }
+    fun startEtaAnimation() {
+        if (etaAnimation != null) {
+            etaTime.animate()
+                    .setDuration(animationDuration)
+                    .alpha(1.0f)
+                    .withEndAction(etaAnimation)
+        } else {
+            etaTime.alpha = 1.0f
+        }
+    }
+
+    fun setupEtaAnimation() {
+        if (etaAnimation == null) {
+            etaAnimation = Runnable {
+                etaTime.animate()
+                        .setDuration(animationDuration)
+                        .alpha(0.6f)
+                        .withEndAction {
+                            startEtaAnimation()
+                        }
+            }
+        }
     }
 
     // This will set up the listeners on the database for automatic callback updates
@@ -128,7 +140,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError?) {
-                throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
         })
     }
@@ -137,24 +148,62 @@ class MainActivity : AppCompatActivity() {
         val statusString = when (status) {
             // TODO: Finish updated status code drawable names
             etaStatusPickup      -> {
+                setupEtaAnimation()
+                startEtaAnimation()
+                animationDuration = 500L
                 etaTime.background = resources.getDrawable(R.drawable.circle_pod_pickup)
-                "Your pod is on the way to pick you up." }
+                "Your pod is on the way to pick you up."
+            }
+            etaStatusWaiting     -> {
+                setupEtaForDestination()
+                animationDuration = 1000L
+                etaTime.background = resources.getDrawable(R.drawable.circle_pod_waiting)
+                etaTime.text = "Your pod here.\nPlease enter the vehicle."
+                return
+            }
             etaStatusDestination -> {
-                etaTime.background = resources.getDrawable(R.drawable.circle_pod_otw)
-                "You on the way to to your destination."
+                animationDuration = 500L
+                etaTime.background = resources.getDrawable(R.drawable.circle_pod_to_destination)
+                "Your are on the way to to your destination."
             }
             etaStatusArrival     -> {
+                etaAnimation = null
+                etaTime.removeCallbacks(etaAnimation)
                 etaTime.background = resources.getDrawable(R.drawable.circle_pod_dropoff)
-                "Your pod has arrived at your destination." }
+                etaTime.text = "Your pod has arrived at your destination.\n"
+                return
+            }
             else -> "Error in pod status."
         }
 
         val etaString = "Pickup: $pickup\n" +
                 "Destination: $destination\n\n" +
                 "$statusString\n\n" +
-                "ETA: $eta minutes"
+                "ETA: $eta seconds"
 
         etaTime.text = etaString
+    }
+
+    fun setupEtaForDestination() {
+        etaTime.setOnClickListener {
+            val database = FirebaseDatabase.getInstance()
+                    .getReference()
+                    .child("users")
+                    .child(userId)
+                    .child("currentTicket")
+            database.child("eta").setValue(10)
+            database.child("status").setValue(etaStatusDestination)
+            // TODO: Remove bug where onClickListener isn't removed with the line below
+            etaTime.setOnClickListener(null)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (etaAnimation != null) {
+            etaTime.removeCallbacks(etaAnimation)
+            etaAnimation = null
+        }
     }
 
     override fun onBackPressed() {
@@ -175,13 +224,8 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun <A, B, C> with(a: A, b: B, f: (A, B) -> C) = f(a, b)
-
-    inline fun <T> with(receiver: T, block: T.() -> Unit) {
-        receiver.block()
-    }
-
-    // For testing purposes
+    // TODO: Remove this later
+    // FOR TESTING/DEMO PURPOSES
     fun createTestTicket() {
         val fromLocation = "Sunnyvale"
         val toLocation = "Union City"
@@ -201,5 +245,11 @@ class MainActivity : AppCompatActivity() {
             database.child("status").setValue(MainActivity.etaStatusPickup)
             database.child("alive").setValue(true)
         }
+    }
+
+    fun <A, B, C> with(a: A, b: B, f: (A, B) -> C) = f(a, b)
+
+    inline fun <T> with(receiver: T, block: T.() -> Unit) {
+        receiver.block()
     }
 }

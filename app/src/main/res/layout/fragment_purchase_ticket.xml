@@ -70,7 +70,7 @@
                 style="@style/BoldTextLabel"/>
 
             <TextView
-                android:text="10/31/2016"
+                android:text="11/16/2016"
                 android:layout_marginRight="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -83,7 +83,7 @@
                 style="@style/BoldTextLabel"/>
 
             <TextView
-                android:text="12:00PM"
+                android:text="3:15PM"
                 android:layout_marginRight="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
