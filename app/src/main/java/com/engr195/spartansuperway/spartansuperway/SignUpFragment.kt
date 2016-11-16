@@ -24,22 +24,31 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // TODO: Check for internet connection
-        createAccountButton.setOnClickListener { createFirebaseAccount() }
+        // TODO: Handle internet connectivity issues
+        createAccountButton.setOnClickListener {
+            val firebaseAccount = FirebaseAccount(
+                    firstNameField.text.toString(),
+                    lastNameField.text.toString(),
+                    emailField.text.toString(),
+                    passwordField.text.toString()
+            )
+            createFirebaseAccount(firebaseAccount)
+        }
+
+        testCreateAccountButton.setOnClickListener {
+            val firebaseAccount = FirebaseAccount(
+                    "Testy",
+                    "The Testing Tester",
+                    "test@gmail.com",
+                    "Test1234"
+            )
+            createFirebaseAccount(firebaseAccount)
+        }
     }
 
     // TODO: Properly handle field validations
     // TODO: Add field validation text (eg. "password & passwordConfirm do not match")
-    private fun createFirebaseAccount() {
-
-//        if (!isValidForm()) return
-
-        val firebaseAccount = FirebaseAccount(
-                firstNameField.text.toString(),
-                lastNameField.text.toString(),
-                emailField.text.toString(),
-                passwordField.text.toString()
-        )
+    private fun createFirebaseAccount(firebaseAccount: FirebaseAccount) {
 
         val auth = FirebaseAuth.getInstance()
         auth.addAuthStateListener {
@@ -54,11 +63,13 @@ class SignUpFragment : Fragment() {
                 Log.d(className, "createUserWithEmail:onComplete: ${task.isSuccessful}")
                 task.isSuccessful()
 
+                // Create user under "users" in Firebase
                 val userId = FirebaseAuth.getInstance().currentUser?.uid
-                var database = FirebaseDatabase.getInstance().getReference()
+                var database = FirebaseDatabase.getInstance().reference
                 database = database.child("users").child(userId)
                 database.child("firstName").setValue(firebaseAccount.firstName)
                 database.child("lastName").setValue(firebaseAccount.lastName)
+                database.child("currentTicket").child("alive").setValue(false)
 
                 // Return to login screen
                 fragmentManager.popBackStack()

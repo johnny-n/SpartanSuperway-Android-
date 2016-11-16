@@ -1,93 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@color/colorNeutral"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:paddingRight="@dimen/activity_horizontal_margin">
+
     <Button
         android:id="@+id/etaTime"
-        android:background="@drawable/circle_pod_pickup"
-        android:text="Your pod has arrived"
-        android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        android:layout_marginTop="15dp"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/circle_shaped_filled"
+        android:text="@string/eta_default_text"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"/>
 
     <android.support.v7.widget.CardView
         android:id="@+id/separator"
-        app:cardBackgroundColor="@color/black"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
-        android:layout_below="@id/etaTime"
         android:layout_width="match_parent"
-        android:layout_height="5dp"/>
+        android:layout_height="5dp"
+        android:layout_below="@id/etaTime"
+        android:layout_marginBottom="32dp"
+        android:layout_marginTop="32dp"
+        app:cardBackgroundColor="@color/black"/>
 
     <RelativeLayout
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/separator"
-        android:layout_alignParentStart="true">
+        android:gravity="center">
 
         <Button
             android:id="@+id/viewTicketsButton"
-            android:background="@drawable/circle_tags"
+            android:layout_width="88dp"
+            android:layout_height="80dp"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_width="88dp"
-            android:layout_height="80dp"/>
+            android:background="@drawable/circle_tags"/>
 
         <Button
             android:id="@+id/purchaseTicketButton"
-            android:background="@drawable/circle_shopping_cart"
-            android:layout_toLeftOf="@id/viewTicketsButton"
             android:layout_width="88dp"
-            android:layout_height="80dp"/>
+            android:layout_height="80dp"
+            android:layout_toLeftOf="@id/viewTicketsButton"
+            android:background="@drawable/circle_shopping_cart"/>
 
         <TextView
-            android:text="@string/purchase_ticket_button_text"
-            android:ems="5"
-            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/purchaseTicketButton"
             android:layout_toLeftOf="@id/viewTicketsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:ems="5"
+            android:gravity="center_horizontal"
+            android:text="@string/purchase_ticket_button_text"/>
 
 
         <TextView
-            android:text="@string/view_tickets_button_text"
-            android:ems="5"
-            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/viewTicketsButton"
             android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:ems="5"
+            android:gravity="center_horizontal"
+            android:text="@string/view_tickets_button_text"/>
 
         <Button
             android:id="@+id/thirdOptionButton"
-            android:background="@drawable/circle_map"
-            android:layout_toRightOf="@id/viewTicketsButton"
             android:layout_width="88dp"
-            android:layout_height="80dp"/>
+            android:layout_height="80dp"
+            android:layout_toRightOf="@id/viewTicketsButton"
+            android:background="@drawable/circle_map"/>
 
         <TextView
-            android:text="@string/map_bottom_text"
-            android:ems="5"
-            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/thirdOptionButton"
             android:layout_toRightOf="@id/viewTicketsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:ems="5"
+            android:gravity="center_horizontal"
+            android:text="@string/map_bottom_text"/>
 
     </RelativeLayout>
-
 
 
 </RelativeLayout>

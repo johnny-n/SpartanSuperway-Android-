@@ -10,10 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.engr195.spartansuperway.spartansuperway.utils.showToast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_purchase_ticket.*
-import kotlinx.android.synthetic.main.fragment_purchase_ticket.square
 
-class PurchaseTicketFragment: Fragment() {
+class PurchaseTicketFragment : Fragment() {
 
     // TODO: Enter hard-coded strings in fragment_purchase_tickets into strings.xml
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
@@ -33,16 +34,39 @@ class PurchaseTicketFragment: Fragment() {
             purchaseTicketButton.visibility = View.GONE
             val ticketScene = Scene.getSceneForLayout(square, R.layout.fragment_ticket, context)
             square.animate()
-                .translationY(-500f)
-                .start()
+                    .translationY(-500f)
+                    .start()
             TransitionManager.go(ticketScene, AutoTransition())
             context.showToast("Ticket purchased!")
 
             val okButton = square.findViewById(R.id.okButton)
             okButton.setOnClickListener {
                 // Go back to MainActivity
+
+                createTestTicket()
                 activity.finish()
             }
+        }
+    }
+
+    fun createTestTicket() {
+        val fromLocation = fromSpinner.selectedItem.toString()
+        val toLocation = toSpinner.selectedItem.toString()
+        val eta = 5
+
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        userId?.let {
+            val database = FirebaseDatabase.getInstance()
+                    .getReference()
+                    .child("users")
+                    .child(userId)
+                    .child("currentTicket")
+
+            database.child("from").setValue(fromLocation)
+            database.child("to").setValue(toLocation)
+            database.child("eta").setValue(eta)
+            database.child("status").setValue(MainActivity.etaStatusPickup)
+            database.child("alive").setValue(true)
         }
     }
 }

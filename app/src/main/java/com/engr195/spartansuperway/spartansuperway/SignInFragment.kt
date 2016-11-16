@@ -71,6 +71,27 @@ class SignInFragment : Fragment() {
                         if (taskResult.isSuccessful) {
                             Log.d(tag, "signInWithEmail:onComplete:${taskResult.isSuccessful}")
                             val intent = Intent(activity, MainActivity::class.java)
+                            val userId = FirebaseAuth.getInstance().currentUser?.uid
+                            userId?.let { intent.putExtra(MainActivity.key_firebaseUid, it) }
+                            startActivity(intent)
+                        } else {
+                            Log.w(tag, "signInEmail:failed", taskResult.exception)
+                            context.showToast("Incorrect email and/or password.")
+                        }
+                    }
+        }
+
+
+        autoSignInButton.setOnClickListener {
+            val email = "test@gmail.com"
+            val password = "Test1234"
+            auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(parentActivity) { taskResult ->
+                        if (taskResult.isSuccessful) {
+                            Log.d(tag, "signInWithEmail:onComplete:${taskResult.isSuccessful}")
+                            val intent = Intent(activity, MainActivity::class.java)
+                            val userId = FirebaseAuth.getInstance().currentUser?.uid
+                            userId?.let { intent.putExtra(MainActivity.key_firebaseUid, it) }
                             startActivity(intent)
                         } else {
                             Log.w(tag, "signInEmail:failed", taskResult.exception)
