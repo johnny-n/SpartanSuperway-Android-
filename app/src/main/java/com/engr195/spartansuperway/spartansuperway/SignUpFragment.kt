@@ -70,6 +70,7 @@ class SignUpFragment : Fragment() {
                 database.child("firstName").setValue(firebaseAccount.firstName)
                 database.child("lastName").setValue(firebaseAccount.lastName)
                 database.child("currentTicket").child("alive").setValue(false)
+                database.child("currentTicket").child("timerOn").setValue("false")
 
                 // Return to login screen
                 fragmentManager.popBackStack()

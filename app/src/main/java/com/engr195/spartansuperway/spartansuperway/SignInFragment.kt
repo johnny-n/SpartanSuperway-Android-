@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.engr195.spartansuperway.spartansuperway.utils.showToast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 
 class SignInFragment : Fragment() {
@@ -91,6 +92,7 @@ class SignInFragment : Fragment() {
                             Log.d(tag, "signInWithEmail:onComplete:${taskResult.isSuccessful}")
                             val intent = Intent(activity, MainActivity::class.java)
                             val userId = FirebaseAuth.getInstance().currentUser?.uid
+                            createTestTicket(userId)
                             userId?.let { intent.putExtra(MainActivity.key_firebaseUid, it) }
                             startActivity(intent)
                         } else {
@@ -98,6 +100,25 @@ class SignInFragment : Fragment() {
                             context.showToast("Incorrect email and/or password.")
                         }
                     }
+        }
+    }
+    fun createTestTicket(userId: String?) {
+        val fromLocation = "Sunnyvale"
+        val toLocation = "Union City"
+        val eta = 0
+
+        userId?.let {
+            val database = FirebaseDatabase.getInstance()
+                    .getReference()
+                    .child("users")
+                    .child(userId)
+                    .child("currentTicket")
+
+            database.child("from").setValue(fromLocation)
+            database.child("to").setValue(toLocation)
+            database.child("eta").setValue(eta)
+            database.child("status").setValue(MainActivity.etaStatusPickup)
+            database.child("alive").setValue(true)
         }
     }
 }

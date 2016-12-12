@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
 
     companion object {
+        val tag = MainActivity::class.java.simpleName
         val key_firebaseUid = "key_firebase_uid"
         val etaStatusPickup = 100       // Pod is otw to pickup user at their location
         val etaStatusWaiting = 200      // Pod is waiting for user to get inside
@@ -53,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         Log.d(tag, userId ?: "userId == null")
 
         userId?.let { setupEtaConnection() }
-        createTestTicket()
+//        createTestTicket()
 
         setupEtaAnimation()
     }
@@ -150,6 +151,7 @@ class MainActivity : AppCompatActivity() {
             etaStatusPickup      -> {
                 setupEtaAnimation()
                 startEtaAnimation()
+
                 animationDuration = 500L
                 etaTime.background = resources.getDrawable(R.drawable.circle_pod_pickup)
                 "Your pod is on the way to pick you up."
@@ -177,11 +179,21 @@ class MainActivity : AppCompatActivity() {
         }
 
         val etaString = "Pickup: $pickup\n" +
-                "Destination: $destination\n\n" +
-                "$statusString\n\n" +
-                "ETA: $eta seconds"
+                        "Destination: $destination\n\n" +
+                        "$statusString\n\n" +
+                        "ETA: $eta seconds"
 
         etaTime.text = etaString
+    }
+
+    fun setupEtaForPickup() {
+        val database = FirebaseDatabase.getInstance()
+                .getReference()
+                .child("users")
+                .child(userId)
+                .child("currentTicket")
+
+
     }
 
     fun setupEtaForDestination() {
@@ -191,7 +203,8 @@ class MainActivity : AppCompatActivity() {
                     .child("users")
                     .child(userId)
                     .child("currentTicket")
-            database.child("eta").setValue(10)
+
+            Log.d(tag, "writing value to status = $etaStatusDestination")
             database.child("status").setValue(etaStatusDestination)
             // TODO: Remove bug where onClickListener isn't removed with the line below
             etaTime.setOnClickListener(null)

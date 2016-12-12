@@ -71,8 +71,8 @@ class PurchaseTicketFragment : Fragment() {
 
             database.child("from").setValue(fromLocation)
             database.child("to").setValue(toLocation)
-            database.child("eta").setValue(eta)
-            database.child("status").setValue(MainActivity.etaStatusPickup)
+//            database.child("eta").setValue(eta)
+            database.child("status").setValue(MainActivity.etaStatusPickup) // etaStatusPickup = 100
             database.child("alive").setValue(true)
         }
     }
