@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         userId?.let { setupEtaConnection() }
 //        createTestTicket()
 
+
         setupEtaAnimation()
     }
 
