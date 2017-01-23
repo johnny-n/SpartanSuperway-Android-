@@ -1,23 +1,21 @@
-package com.engr195.spartansuperway.spartansuperway
+package com.engr195.spartansuperway.spartansuperway.ui.activities
 
-import android.graphics.Point
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.transition.TransitionManager
-import android.util.Log
-import android.view.animation.ScaleAnimation
-import android.view.animation.TranslateAnimation
-import kotlinx.android.synthetic.main.activity_payment.*
+import android.view.MenuItem
+import com.engr195.spartansuperway.spartansuperway.R
+import com.engr195.spartansuperway.spartansuperway.ui.fragments.SignInFragment
 
-class PaymentActivity: AppCompatActivity() {
+class LoginActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_payment)
+        setContentView(R.layout.activity_login)
 
+        val signInFragment = SignInFragment()
         supportFragmentManager.beginTransaction()
-            .add(R.id.container, PurchaseTicketFragment())
+            .add(R.id.fragment_container, signInFragment)
             .commit()
     }
 
@@ -32,5 +30,4 @@ class PaymentActivity: AppCompatActivity() {
         }
         transaction.replace(R.id.fragment_container, fragment).commit()
     }
-
 }

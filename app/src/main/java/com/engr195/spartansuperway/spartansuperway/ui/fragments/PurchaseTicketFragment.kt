@@ -1,4 +1,4 @@
-package com.engr195.spartansuperway.spartansuperway
+package com.engr195.spartansuperway.spartansuperway.ui.fragments
 
 import android.os.Bundle
 import android.support.transition.AutoTransition
@@ -10,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import com.engr195.spartansuperway.spartansuperway.R
+import com.engr195.spartansuperway.spartansuperway.ui.activities.MainActivity
 import com.engr195.spartansuperway.spartansuperway.utils.showToast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase

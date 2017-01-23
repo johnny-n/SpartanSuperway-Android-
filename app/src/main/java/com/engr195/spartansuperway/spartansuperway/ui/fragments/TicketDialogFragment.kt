@@ -1,5 +1,6 @@
-package com.engr195.spartansuperway.spartansuperway
+package com.engr195.spartansuperway.spartansuperway.ui.fragments
 
+import android.R
 import android.app.Dialog
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
@@ -8,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import com.engr195.spartansuperway.spartansuperway.utils.Ticket
+import com.engr195.spartansuperway.spartansuperway.data.Ticket
 
 class TicketDialogFragment: DialogFragment() {
 
@@ -37,7 +38,7 @@ class TicketDialogFragment: DialogFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.fragment_ticket, container, false)
+        inflater.inflate(com.engr195.spartansuperway.spartansuperway.R.layout.fragment_ticket, container, false)
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
@@ -48,15 +49,15 @@ class TicketDialogFragment: DialogFragment() {
             val ticketTime = getString(args_time)
         }
 
-        val ticketView = LayoutInflater.from(context).inflate(R.layout.fragment_ticket, null)
+        val ticketView = LayoutInflater.from(context).inflate(com.engr195.spartansuperway.spartansuperway.R.layout.fragment_ticket, null)
 
 
         // OK button will be set in AlertDialog.Builder, so we'll hide the default one inside the view
-        val okButton = ticketView.findViewById(R.id.okButton) as Button
+        val okButton = ticketView.findViewById(com.engr195.spartansuperway.spartansuperway.R.id.okButton) as Button
         okButton.visibility = View.GONE
 
         return AlertDialog.Builder(context)
-                .setPositiveButton(android.R.string.ok) { dialog, which ->
+                .setPositiveButton(R.string.ok) { dialog, which ->
                     dialog.dismiss()
                 }
                 .setView(ticketView)

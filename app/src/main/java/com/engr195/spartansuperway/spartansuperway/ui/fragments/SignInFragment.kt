@@ -1,4 +1,4 @@
-package com.engr195.spartansuperway.spartansuperway
+package com.engr195.spartansuperway.spartansuperway.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.engr195.spartansuperway.spartansuperway.R
+import com.engr195.spartansuperway.spartansuperway.ui.activities.LoginActivity
+import com.engr195.spartansuperway.spartansuperway.ui.activities.MainActivity
 import com.engr195.spartansuperway.spartansuperway.utils.showToast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase

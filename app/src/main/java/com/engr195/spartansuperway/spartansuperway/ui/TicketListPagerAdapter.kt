@@ -1,10 +1,11 @@
-package com.engr195.spartansuperway.spartansuperway
+package com.engr195.spartansuperway.spartansuperway.ui
 
 import android.content.Context
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import com.engr195.spartansuperway.spartansuperway.utils.Ticket
+import com.engr195.spartansuperway.spartansuperway.ui.fragments.TicketListFragment
+import com.engr195.spartansuperway.spartansuperway.data.Ticket
 
 class TicketListPagerAdapter(val ticketList: List<Ticket>, val context: Context, fragmentManager: FragmentManager): FragmentPagerAdapter(fragmentManager) {
 

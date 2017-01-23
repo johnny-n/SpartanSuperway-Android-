@@ -1,4 +1,4 @@
-package com.engr195.spartansuperway.spartansuperway
+package com.engr195.spartansuperway.spartansuperway.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,11 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import com.engr195.spartansuperway.spartansuperway.R
+import com.engr195.spartansuperway.spartansuperway.data.etaStatusArrival
+import com.engr195.spartansuperway.spartansuperway.data.etaStatusDestination
+import com.engr195.spartansuperway.spartansuperway.data.etaStatusPickup
+import com.engr195.spartansuperway.spartansuperway.data.etaStatusWaiting
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -19,11 +24,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         val tag = MainActivity::class.java.simpleName
         val key_firebaseUid = "key_firebase_uid"
-        val etaStatusPickup = 100       // Pod is otw to pickup user at their location
-        val etaStatusWaiting = 200      // Pod is waiting for user to get inside
-        val etaStatusDestination = 300  // Pod is otw to user's final destination
-        val etaStatusArrival = 400      // Pod has arrived to the user's final destination
-        val etaStatusNoTicket = 900
+
     }
 
     private val tag = "MainActivity"
@@ -205,7 +206,7 @@ class MainActivity : AppCompatActivity() {
                     .child(userId)
                     .child("currentTicket")
 
-            Log.d(tag, "writing value to status = $etaStatusDestination")
+            Log.d(tag, "writing value to status = ${etaStatusDestination}")
             database.child("status").setValue(etaStatusDestination)
             // TODO: Remove bug where onClickListener isn't removed with the line below
             etaTime.setOnClickListener(null)
@@ -256,7 +257,7 @@ class MainActivity : AppCompatActivity() {
             database.child("from").setValue(fromLocation)
             database.child("to").setValue(toLocation)
             database.child("eta").setValue(eta)
-            database.child("status").setValue(MainActivity.etaStatusPickup)
+            database.child("status").setValue(etaStatusPickup)
             database.child("alive").setValue(true)
         }
     }

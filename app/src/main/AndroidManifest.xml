@@ -18,8 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"/>
-        <activity android:name=".PaymentActivity"/>
-        <activity android:name=".ViewTicketsActivity"/>
+        <activity android:name=".ui.activities.PaymentActivity"/>
+        <activity android:name=".ui.activities.ViewTicketsActivity"/>
     </application>
 
 </manifest>

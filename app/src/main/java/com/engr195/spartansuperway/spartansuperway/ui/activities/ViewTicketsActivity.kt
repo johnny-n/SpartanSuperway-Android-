@@ -1,8 +1,10 @@
-package com.engr195.spartansuperway.spartansuperway
+package com.engr195.spartansuperway.spartansuperway.ui.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.engr195.spartansuperway.spartansuperway.utils.Ticket
+import com.engr195.spartansuperway.spartansuperway.R
+import com.engr195.spartansuperway.spartansuperway.ui.TicketListPagerAdapter
+import com.engr195.spartansuperway.spartansuperway.data.Ticket
 import kotlinx.android.synthetic.main.activity_view_tickets.*
 
 class ViewTicketsActivity: AppCompatActivity() {
