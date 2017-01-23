@@ -1,6 +1,48 @@
 # Spartan Superway Mobile (Android)
 ENGR 195C - Interdisciplinary Senior Capstone Project
 
+# Installing Kotlin
+This project uses Kotlin, a JVM language that is 100% interoperable with Java.
+Kotlin was chosen for this project due to the language's expressiveness, type-safe system, and maintainability over Java.
+To install Kotlin, follow these steps:
+
+  1. Install Kotlin plugin
+  
+    Preferences -> Plugins -> Kotlin
+  
+  2. Add Kotlin to Gradle
+  
+  build.Gradle (project)
+  ````
+  buildscript {
+    ...
+    ext.kotlin_version = '1.0.5-2'
+    ...
+    dependencies {
+      ...
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+  }
+  ````
+  build.Gradle (app)
+  ````
+  apply plugin: 'com.android.application'
+  apply plugin: 'kotlin-android'
+  apply plugin: 'kotlin-android-extensions'
+
+  android {
+    ...
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+  }
+
+  dependencies {
+    ...
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  }
+````
+
 # License
 ````
 Licensed to the Apache Software Foundation (ASF) under one or more contributor
