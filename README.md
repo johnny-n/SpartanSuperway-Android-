@@ -2,8 +2,7 @@
 ENGR 195C - Interdisciplinary Senior Capstone Project
 
 # Installing Kotlin
-This project uses Kotlin, a JVM language that is 100% interoperable with Java.
-Kotlin was chosen for this project due to the language's expressiveness, type-safe system, and maintainability over Java.
+This project uses Kotlin, a JVM language that is 100% interoperable with Java.Kotlin was chosen for this project due to the language's expressiveness, safe type-system, and maintainability over Java.
 To install Kotlin, follow these steps:
 
   1. Install Kotlin plugin
