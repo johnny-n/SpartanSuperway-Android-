@@ -46,17 +46,23 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        purchaseTicketButton.viewTreeObserver.addOnPreDrawListener {
+            purchaseTicketButton.viewTreeObserver.removeOnDrawListener()
+            return true
+        }
+
         viewTicketsButton.setOnClickListener {
             val intent = Intent(this, ViewTicketsActivity::class.java)
             startActivity(intent)
         }
 
+
         intent.extras.get(key_firebaseUid)?.let { userId = it as String }
         Log.d(tag, userId ?: "userId == null")
 
+
         userId?.let { setupEtaConnection() }
 //        createTestTicket()
-
 
         setupEtaAnimation()
     }
