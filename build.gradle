@@ -8,8 +8,6 @@ allprojects {
 
 buildscript {
     ext.kotlin_version = '1.0.6'
-    ext.kotlin_version = '1.0.5-2'
-    ext.kotlin_version = '1.0.4'
     ext.google_play_services_version = '3.0.0'
     repositories {
         jcenter()

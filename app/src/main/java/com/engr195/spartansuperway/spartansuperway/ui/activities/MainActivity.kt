@@ -46,11 +46,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        purchaseTicketButton.viewTreeObserver.addOnPreDrawListener {
-            purchaseTicketButton.viewTreeObserver.removeOnDrawListener()
-            return true
-        }
-
         viewTicketsButton.setOnClickListener {
             val intent = Intent(this, ViewTicketsActivity::class.java)
             startActivity(intent)
