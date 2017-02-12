@@ -24,14 +24,14 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="From: "
+                android:text="@string/purchase_ticket_from"
                 android:layout_marginBottom="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/BoldTextLabel"/>
 
             <TextView
-                android:text="To: "
+                android:text="@string/purchase_ticket_to"
                 android:layout_marginBottom="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -10,9 +10,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.engr195.spartansuperway.spartansuperway.R
+import com.engr195.spartansuperway.spartansuperway.data.etaStatusPickup
 import com.engr195.spartansuperway.spartansuperway.ui.activities.LoginActivity
 import com.engr195.spartansuperway.spartansuperway.ui.activities.MainActivity
 import com.engr195.spartansuperway.spartansuperway.utils.showToast
+import com.engr195.spartansuperway.spartansuperway.data.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_sign_in.*
@@ -120,7 +122,7 @@ class SignInFragment : Fragment() {
             database.child("from").setValue(fromLocation)
             database.child("to").setValue(toLocation)
             database.child("eta").setValue(eta)
-            database.child("status").setValue(MainActivity.etaStatusPickup)
+            database.child("status").setValue(etaStatusPickup)
             database.child("alive").setValue(true)
         }
     }

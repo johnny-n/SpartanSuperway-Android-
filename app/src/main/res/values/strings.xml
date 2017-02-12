@@ -42,18 +42,20 @@
     <string name="ticket_time_label">Time:</string>
     <string name="ticket_from_location_label">From:</string>
     <string name="ticket_to_location_label">To:</string>
+
+    // PurchaseTicketFragment
+    <string name="purchase_ticket_from">From: </string>
+    <string name="purchase_ticket_to">To: </string>
     
 
     <string name="transition_test">transition_test</string>
 
     <!-- Change later -->
     <array name="spinner_locations">
-        <item>Alameda</item>
-        <item>Berkeley</item>
-        <item>Cupertino</item>
-        <item>Palo Alto</item>
-        <item>San Francisco</item>
-        <item>San Jose</item>
+        <item>Station 1</item>
+        <item>Station 2</item>
+        <item>Station 3</item>
+        <item>Station 4</item>
     </array>
 
 </resources>

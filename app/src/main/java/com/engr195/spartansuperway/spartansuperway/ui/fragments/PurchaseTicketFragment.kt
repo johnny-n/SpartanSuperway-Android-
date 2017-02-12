@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.engr195.spartansuperway.spartansuperway.R
-import com.engr195.spartansuperway.spartansuperway.ui.activities.MainActivity
+import com.engr195.spartansuperway.spartansuperway.data.etaStatusPickup
 import com.engr195.spartansuperway.spartansuperway.utils.showToast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -61,7 +61,6 @@ class PurchaseTicketFragment : Fragment() {
     fun createTestTicket() {
         val fromLocation = fromSpinner.selectedItem.toString()
         val toLocation = toSpinner.selectedItem.toString()
-        val eta = 10
 
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         userId?.let {
@@ -71,10 +70,9 @@ class PurchaseTicketFragment : Fragment() {
                     .child(userId)
                     .child("currentTicket")
 
-            database.child("from").setValue(fromLocation)
-            database.child("to").setValue(toLocation)
-//            database.child("eta").setValue(eta)
-            database.child("status").setValue(MainActivity.etaStatusPickup) // etaStatusPickup = 100
+            database.child("from").setValue(fromLocation.last().toString())
+            database.child("to").setValue(toLocation.last().toString())
+            database.child("status").setValue(etaStatusPickup) // etaStatusPickup = 100
             database.child("alive").setValue(true)
         }
     }

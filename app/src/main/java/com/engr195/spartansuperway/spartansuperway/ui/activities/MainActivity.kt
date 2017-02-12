@@ -11,20 +11,17 @@ import com.engr195.spartansuperway.spartansuperway.data.etaStatusArrival
 import com.engr195.spartansuperway.spartansuperway.data.etaStatusDestination
 import com.engr195.spartansuperway.spartansuperway.data.etaStatusPickup
 import com.engr195.spartansuperway.spartansuperway.data.etaStatusWaiting
+import com.engr195.spartansuperway.spartansuperway.utils.SimpleChildEventListener
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-
     companion object {
         val tag = MainActivity::class.java.simpleName
         val key_firebaseUid = "key_firebase_uid"
-
     }
 
     private val tag = "MainActivity"
@@ -32,10 +29,11 @@ class MainActivity : AppCompatActivity() {
     var userId: String? = null
     var etaAnimation: Runnable? = null
     var animationDuration = 500L
-    var pickupLocation = "pickupLocation"
-    var destLocation = "destLocation"
     var statusCode = 100
     var etaValue = 1337
+    // Pickup/dropoff locations pertain to station #
+    var pickupLocation = 0
+    var destLocation = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,67 +86,36 @@ class MainActivity : AppCompatActivity() {
 
     // This will set up the listeners on the database for automatic callback updates
     fun setupEtaConnection() {
-        val database = FirebaseDatabase.getInstance()
+        val currentTicketRef = FirebaseDatabase.getInstance()
                 .getReference()
                 .child("users")
                 .child(userId)
                 .child("currentTicket")
 
-//        database.addListenerForSingleValueEvent(object : ValueEventListener {
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                val ticketAlive = snapshot.child("currentTicket").child("alive").toString().toBoolean()
-//                if (ticketAlive) {
-//                    val pickupLocation = snapshot.child("from").value.toString()
-//                    val destLocation = snapshot.child("to").value.toString()
-//                    val statusCode = snapshot.child("status").value.toString().toInt()
-//                    val etaValue = snapshot.value.toString().toInt()
-//                    Log.d("ETA Value", "eta = $etaValue")
-//                    updateEta(pickupLocation, destLocation, statusCode, etaValue)
-//                }
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                Log.e("MainActivity", "singleValueEvent error: ${error.toString()}")
-//            }
-//        })
-
         // For updating ETA
-        database.addChildEventListener(object : ChildEventListener {
-            override fun onChildMoved(snapshot: DataSnapshot?, prevChild: String?) {
-            }
+        currentTicketRef.addChildEventListener(object: SimpleChildEventListener() {
+            override fun onChildChanged(snapshot: DataSnapshot?, prevChild: String?) {
 
-            override fun onChildChanged(snapshot: DataSnapshot, prevChild: String?) {
-                // TODO: Save these variables globally
-
-                val keyValue = snapshot.value.toString()
-                when (snapshot.key) {
-                    "from"  -> pickupLocation = keyValue
-                    "to"    -> destLocation = keyValue
+                val keyValue = snapshot?.value.toString()
+                when (snapshot?.key) {
+                    "from"  -> pickupLocation = keyValue.toInt()
+                    "to"    -> destLocation = keyValue.toInt()
                     "status"-> statusCode = keyValue.toInt()
                     "eta"   -> etaValue = keyValue.toInt()
                 }
 
-                Log.d("PickupLocation", pickupLocation)
-                Log.d("DestLocation", destLocation)
+                Log.d("PickupLocation", pickupLocation.toString())
+                Log.d("DestLocation", destLocation.toString())
                 Log.d("StatusCode", statusCode.toString())
                 Log.d("ETA Value", "eta = $etaValue")
 
-                // TODO: Change status color depending on value of status code for ETA
-                updateEta(pickupLocation, destLocation, statusCode, etaValue)
-            }
-
-            override fun onChildAdded(snapshot: DataSnapshot?, prevChild: String?) {
-            }
-
-            override fun onChildRemoved(snapshot: DataSnapshot?) {
-            }
-
-            override fun onCancelled(error: DatabaseError?) {
+                updateEtaUi(pickupLocation, destLocation, statusCode, etaValue)
             }
         })
     }
 
-    fun updateEta(pickup: String, destination: String, status: Int, eta: Int) {
+    // This gets called from the Firebase listeners whenever there are updates to the database
+    fun updateEtaUi(pickup: Int, destination: Int, status: Int, eta: Int) {
         val statusString = when (status) {
             // TODO: Finish updated status code drawable names
             etaStatusPickup      -> {
