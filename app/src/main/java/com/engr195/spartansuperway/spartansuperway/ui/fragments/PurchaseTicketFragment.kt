@@ -37,7 +37,7 @@ class PurchaseTicketFragment : Fragment() {
             purchaseTicketButton.visibility = View.GONE
             val ticketScene = Scene.getSceneForLayout(square, R.layout.fragment_ticket, context)
 
-            // Move button's container up (in scene that has yet to be .go() to)
+            // Move button's container up (in scene that TransitionManager has yet to '.go()' to)
             square.animate()
                     .translationY(-500f)
                     .start()

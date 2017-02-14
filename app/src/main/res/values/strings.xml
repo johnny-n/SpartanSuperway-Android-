@@ -46,7 +46,10 @@
     // PurchaseTicketFragment
     <string name="purchase_ticket_from">From: </string>
     <string name="purchase_ticket_to">To: </string>
-    
+    <string name="station_1">Station 1</string>
+    <string name="station_2">Station 2</string>
+    <string name="station_3">Station 3</string>
+    <string name="station_4">Station 4</string>
 
     <string name="transition_test">transition_test</string>
 
