@@ -1,5 +1,6 @@
 package com.engr195.spartansuperway.spartansuperway.ui.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.support.transition.AutoTransition
 import android.support.transition.Scene
@@ -8,28 +9,38 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.TextView
 import com.engr195.spartansuperway.spartansuperway.R
 import com.engr195.spartansuperway.spartansuperway.data.etaStatusPickup
 import com.engr195.spartansuperway.spartansuperway.utils.showToast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.dialog_select_station.view.*
 import kotlinx.android.synthetic.main.fragment_purchase_ticket.*
 
 class PurchaseTicketFragment : Fragment() {
 
-    // TODO: Enter hard-coded strings in fragment_purchase_tickets into strings.xml
+    var dialog: AlertDialog? = null
+    // TODO: Remove this later and work on 'TODO: Guard..' below
+    var fromStationSelected = false
+    var toStationSelected = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_purchase_ticket, container, false)
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set up spinner
-        val spinnerAdapter = ArrayAdapter.createFromResource(context, R.array.spinner_locations, android.R.layout.simple_spinner_item)
-        fromSpinner.adapter = spinnerAdapter
-        toSpinner.adapter = spinnerAdapter
+        // TODO: Guard purchase button to activate only when all fields are fulfilled correctly
+        fromButton.setOnClickListener {
+            fromStationSelected = true
+            showDialogForLocation(fromStationTextView)
+        }
+        toButton.setOnClickListener {
+            toStationSelected = true
+            showDialogForLocation(toStationTextView)
+        }
 
         purchaseTicketButton.setOnClickListener {
             // TODO: Invalidate all payment fields when purchaseTicketButton is clicked
@@ -46,8 +57,8 @@ class PurchaseTicketFragment : Fragment() {
 
             val fromLocation = square.findViewById(R.id.ticketFromLocation) as TextView
             val toLocation = square.findViewById(R.id.ticketToLocation) as TextView
-            fromLocation.text = fromSpinner.selectedItem.toString()
-            toLocation.text = toSpinner.selectedItem.toString()
+            fromLocation.text = fromStationTextView.text
+            toLocation.text = toStationTextView.text
 
             val okButton = square.findViewById(R.id.okButton)
             okButton.setOnClickListener {
@@ -58,9 +69,38 @@ class PurchaseTicketFragment : Fragment() {
         }
     }
 
+    fun showDialogForLocation(locationTextView: TextView) {
+        val view = LayoutInflater.from(context).inflate(R.layout.dialog_select_station, null)
+
+        // Set listener for each station button, and set the
+        // result to the associated locationTextView TextView(from/to)
+        setStationButtonListenerFor(view.stationOne, locationTextView)
+        setStationButtonListenerFor(view.stationTwo, locationTextView)
+        setStationButtonListenerFor(view.stationThree, locationTextView)
+        setStationButtonListenerFor(view.stationFour, locationTextView)
+
+        dialog = AlertDialog.Builder(context)
+                .setView(view)
+                .setCancelable(true)
+                .show()
+
+        if (fromStationSelected && toStationSelected) {
+            TransitionManager.beginDelayedTransition(square)
+            square.alpha = 1.0f
+            purchaseTicketButton.isEnabled = true
+        }
+    }
+
+    fun setStationButtonListenerFor(button: Button, location: TextView) {
+        button.setOnClickListener {
+            location.text = button.text
+            dialog?.dismiss()
+        }
+    }
+
     fun createTestTicket() {
-        val fromLocation = fromSpinner.selectedItem.toString()
-        val toLocation = toSpinner.selectedItem.toString()
+        val fromStation = fromStationTextView.text
+        val toStation = toStationTextView.text
 
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         userId?.let {
@@ -70,10 +110,11 @@ class PurchaseTicketFragment : Fragment() {
                     .child(userId)
                     .child("currentTicket")
 
-            database.child("from").setValue(fromLocation.last().toString())
-            database.child("to").setValue(toLocation.last().toString())
-            database.child("status").setValue(etaStatusPickup) // etaStatusPickup = 100
-            database.child("alive").setValue(true)
+            database.child("from").setValue(fromStation.last().toString().toInt())
+            database.child("to").setValue(toStation.last().toString().toInt())
+            database.child("status").setValue(etaStatusPickup)
+            database.child("isNewTicket").setValue(true)
+            database.child("timerOn").setValue(false)
         }
     }
 }

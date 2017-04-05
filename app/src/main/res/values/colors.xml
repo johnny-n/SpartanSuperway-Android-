@@ -7,8 +7,17 @@
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="green">#66BB6A</color>
-    <color name="red">#FF5252</color>
+    <color name="green">@android:color/holo_green_light</color>
+    <color name="greenDark">@android:color/holo_green_dark</color>
+    <color name="red">@android:color/holo_red_light</color>
+    <color name="redDark">@android:color/holo_red_dark</color>
+    <color name="blue">@android:color/holo_blue_light</color>
+    <color name="blueDark">@android:color/holo_blue_dark</color>
+    <color name="purple">#C081EA</color>
+    <color name="purpleDark">#9768B7</color>
+    <color name="yellow">#FFD055</color>
+    <color name="yellowDark">#DBB143</color>
+
 
     <color name="darkNeutralBackground">#99323232</color>
 </resources>

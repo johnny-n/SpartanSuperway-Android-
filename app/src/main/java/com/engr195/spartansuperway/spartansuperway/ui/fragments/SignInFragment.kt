@@ -14,7 +14,6 @@ import com.engr195.spartansuperway.spartansuperway.data.etaStatusPickup
 import com.engr195.spartansuperway.spartansuperway.ui.activities.LoginActivity
 import com.engr195.spartansuperway.spartansuperway.ui.activities.MainActivity
 import com.engr195.spartansuperway.spartansuperway.utils.showToast
-import com.engr195.spartansuperway.spartansuperway.data.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_sign_in.*
@@ -108,8 +107,8 @@ class SignInFragment : Fragment() {
         }
     }
     fun createTestTicket(userId: String?) {
-        val fromLocation = "Sunnyvale"
-        val toLocation = "Union City"
+        val fromLocation = 0
+        val toLocation = 0
         val eta = 0
 
         userId?.let {

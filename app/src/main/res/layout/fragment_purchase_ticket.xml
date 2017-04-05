@@ -6,143 +6,149 @@
 
     <View
         android:id="@+id/overlay"
+        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/paymentContainer"
         android:padding="16dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
 
         <LinearLayout
-            android:id="@+id/leftSide"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:text="@string/purchase_ticket_from"
-                android:layout_marginBottom="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/BoldTextLabel"/>
-
-            <TextView
-                android:text="@string/purchase_ticket_to"
-                android:layout_marginBottom="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/BoldTextLabel"/>
-
-        </LinearLayout>
-
-
-        <Spinner
-            android:id="@+id/fromSpinner"
-            android:layout_marginBottom="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"/>
-
-        <Spinner
-            android:id="@+id/toSpinner"
-            android:layout_below="@id/fromSpinner"
-            android:layout_marginBottom="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"/>
-
-        <LinearLayout
-            android:id="@+id/dateAndTime"
-            android:layout_marginBottom="20dp"
-            android:layout_below="@id/leftSide"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="Date:"
-                android:layout_marginRight="10dp"
-                android:layout_width="wrap_content"
+                android:text="@string/ticket_from_location_label"
+                android:layout_weight="1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/BoldTextLabel"/>
 
             <TextView
-                android:text="11/16/2016"
-                android:layout_marginRight="20dp"
-                android:layout_width="wrap_content"
+                android:id="@+id/fromStationTextView"
+                android:text="@string/ticket_station_default_value"
+                android:layout_weight="2"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
 
-            <TextView
-                android:text="Time:"
-                android:layout_marginRight="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/BoldTextLabel"/>
-
-            <TextView
-                android:text="3:15PM"
-                android:layout_marginRight="20dp"
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/fromButton"
+                android:text="@string/select_station_button_text"
+                android:textSize="16sp"
+                android:layout_weight="2"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_below="@id/dateAndTime"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="Allow ride sharing?"
-                android:layout_marginRight="10dp"
-                android:layout_width="wrap_content"
+                android:text="@string/ticket_to_location_label"
+                android:layout_weight="1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/BoldTextLabel"/>
 
             <TextView
-                android:text="Yes/No"
-                android:layout_width="wrap_content"
+                android:id="@+id/toStationTextView"
+                android:text="@string/ticket_station_default_value"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/toButton"
+                android:text="@string/select_station_button_text"
+                android:textSize="16sp"
+                android:layout_weight="2"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/calculatedCost"
-            android:text="Calculated Cost"
-            android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:text="$100"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/calculatedCost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <TextView
+                android:text="@string/ticket_date_label"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/BoldTextLabel"/>
+
+            <TextView
+                android:text="5/1/2017"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:text="Select date"
+                android:textSize="16sp"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/ticket_time_label"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/BoldTextLabel"/>
+
+            <TextView
+                android:text="12:00 PM"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:text="Set time"
+                android:textSize="16sp"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
 
         <FrameLayout
             android:id="@+id/square"
             android:background="@color/colorPrimary"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:alpha=".5"
+            android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/purchaseTicketButton"
                 android:text="Purchase"
+                android:enabled="false"
                 android:textColor="@color/white"
                 android:background="@color/colorPrimary"
-                android:layout_gravity="center"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"/>
 
         </FrameLayout>
-
-    </RelativeLayout>
-
-
+    </LinearLayout>
 </RelativeLayout>

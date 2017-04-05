@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/paymentContainer"
                 android:background="@color/colorNeutral"
-             android:id="@+id/paymentContainer"
-             android:layout_alignParentTop="true"
-             android:layout_width="wrap_content"
-             android:layout_height="match_parent">
+                android:layout_alignParentTop="true"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/square"
@@ -17,7 +18,7 @@
         <RelativeLayout
             android:padding="16dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:id="@+id/dateAndTime"
@@ -86,37 +87,37 @@
 
             <TextView
                 android:id="@+id/ticketFromLocation"
-                android:text="Palo Alto"
                 android:layout_below="@id/dateAndTime"
                 android:layout_marginBottom="20dp"
                 android:layout_alignParentRight="true"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                style="@style/TicketText"/>
+                style="@style/TicketText"
+                tools:text="Station 1"/>
 
             <TextView
                 android:id="@+id/ticketToLocation"
-                android:text="San Francisco"
                 android:layout_below="@id/ticketFromLocation"
                 android:layout_marginBottom="20dp"
                 android:layout_alignParentRight="true"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                style="@style/TicketText"/>
+                style="@style/TicketText"
+                tools:text="Station 4"/>
 
             <ImageView
                 android:id="@+id/qrCode"
                 android:src="@android:drawable/ic_dialog_info"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/ticketToLocation"
-                android:layout_width="200dp"
-                android:layout_height="200dp"/>
+                android:layout_width="150dp"
+                android:layout_height="150dp"/>
 
             <Button
                 android:id="@+id/okButton"
                 android:text="@android:string/ok"
+                android:layout_alignBottom="@id/qrCode"
                 android:layout_alignParentRight="true"
-                android:layout_below="@id/qrCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 

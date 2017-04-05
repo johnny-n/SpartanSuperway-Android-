@@ -7,10 +7,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.engr195.spartansuperway.spartansuperway.R
-import com.engr195.spartansuperway.spartansuperway.data.etaStatusArrival
-import com.engr195.spartansuperway.spartansuperway.data.etaStatusDestination
-import com.engr195.spartansuperway.spartansuperway.data.etaStatusPickup
-import com.engr195.spartansuperway.spartansuperway.data.etaStatusWaiting
+import com.engr195.spartansuperway.spartansuperway.data.*
 import com.engr195.spartansuperway.spartansuperway.utils.SimpleChildEventListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -30,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     var etaAnimation: Runnable? = null
     var animationDuration = 500L
     var statusCode = 100
-    var etaValue = 1337
+    var etaValue = 10
     // Pickup/dropoff locations pertain to station #
     var pickupLocation = 0
     var destLocation = 0
@@ -58,6 +55,11 @@ class MainActivity : AppCompatActivity() {
 //        createTestTicket()
 
         setupEtaAnimation()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        etaTime.isEnabled = true
     }
 
     fun startEtaAnimation() {
@@ -123,29 +125,35 @@ class MainActivity : AppCompatActivity() {
                 startEtaAnimation()
 
                 animationDuration = 500L
-                etaTime.background = resources.getDrawable(R.drawable.circle_pod_pickup)
+                etaTime.background = resources.getDrawable(R.drawable.circle_green)
                 "Your pod is on the way to pick you up."
             }
             etaStatusWaiting     -> {
                 setupEtaForDestination()
                 animationDuration = 1000L
-                etaTime.background = resources.getDrawable(R.drawable.circle_pod_waiting)
+                etaTime.background = resources.getDrawable(R.drawable.circle_green)
                 etaTime.text = "Your pod here.\nPlease enter the vehicle."
                 return
             }
             etaStatusDestination -> {
                 animationDuration = 500L
-                etaTime.background = resources.getDrawable(R.drawable.circle_pod_to_destination)
+                etaTime.background = resources.getDrawable(R.drawable.circle_green)
                 "Your are on the way to to your destination."
             }
             etaStatusArrival     -> {
                 etaAnimation = null
                 etaTime.removeCallbacks(etaAnimation)
-                etaTime.background = resources.getDrawable(R.drawable.circle_pod_dropoff)
+                etaTime.background = resources.getDrawable(R.drawable.circle_yellow)
                 etaTime.text = "Your pod has arrived at your destination.\n"
+                completeEtaStatus()
                 return
             }
-            else -> "Error in pod status."
+            etaStatusNoTicket    -> {
+                etaTime.background = resources.getDrawable(R.drawable.circle_idle)
+                etaTime.text = "No active ticket."
+                return
+            }
+            else -> "Error in pod status\n"
         }
 
         val etaString = "Pickup: $pickup\n" +
@@ -162,8 +170,7 @@ class MainActivity : AppCompatActivity() {
                 .child("users")
                 .child(userId)
                 .child("currentTicket")
-
-
+        
     }
 
     fun setupEtaForDestination() {
@@ -175,9 +182,26 @@ class MainActivity : AppCompatActivity() {
                     .child("currentTicket")
 
             Log.d(tag, "writing value to status = ${etaStatusDestination}")
+            database.child("eta").setValue(10)
             database.child("status").setValue(etaStatusDestination)
             // TODO: Remove bug where onClickListener isn't removed with the line below
             etaTime.setOnClickListener(null)
+        }
+    }
+
+    // TODO: Do something with this?
+    fun completeEtaStatus() {
+        etaTime.setOnClickListener {
+            val database = FirebaseDatabase.getInstance()
+                    .getReference()
+                    .child("users")
+                    .child(userId)
+                    .child("currentTicket")
+
+            database.child("status").setValue(etaStatusNoTicket)
+            // TODO: Remove bug where onClickListener isn't removed with the line below
+            etaTime.setOnClickListener(null)
+            etaTime.isEnabled = false
         }
     }
 
@@ -210,8 +234,8 @@ class MainActivity : AppCompatActivity() {
     // TODO: Remove this later
     // FOR TESTING/DEMO PURPOSES
     fun createTestTicket() {
-        val fromLocation = "Sunnyvale"
-        val toLocation = "Union City"
+        val fromLocation = 0
+        val toLocation = 0
         val eta = 12345
 
         val userId = FirebaseAuth.getInstance().currentUser?.uid
@@ -226,7 +250,7 @@ class MainActivity : AppCompatActivity() {
             database.child("to").setValue(toLocation)
             database.child("eta").setValue(eta)
             database.child("status").setValue(etaStatusPickup)
-            database.child("alive").setValue(true)
+            database.child("isNewTicket").setValue(true)
         }
     }
 
