@@ -8,52 +8,81 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import com.engr195.spartansuperway.spartansuperway.R
+import com.engr195.spartansuperway.spartansuperway.data.key_firebaseUid
 import com.engr195.spartansuperway.spartansuperway.ui.fragments.MainFragment
-import com.engr195.spartansuperway.spartansuperway.ui.fragments.MainFragment.Companion.key_firebaseUid
 import com.engr195.spartansuperway.spartansuperway.ui.fragments.TicketListFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
 
+    enum class TabNames(val title: String) {
+        MAIN("Main"),
+        HISTORY("History")
+    }
+
     companion object {
         val tag = MainActivity::class.java.simpleName
     }
 
-    private val tag = "MainActivity"
-
-    var userId: String? = null
-
+    val tag = "MainActivity"
+    lateinit var userId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        fab.setOnClickListener {
-            val intent = Intent(this, PaymentActivity::class.java)
-            startActivity(intent)
-        }
+        userId = intent.extras.getString(key_firebaseUid)
+        Log.d(tag, userId)
 
         viewpager.adapter = FragmentAdapter(supportFragmentManager)
         tabLayout.setupWithViewPager(viewpager)
 
-        intent.extras.get(key_firebaseUid)?.let {
-            userId = it as String
+        fab.setOnClickListener {
+            val intent = Intent(this, PaymentActivity::class.java)
+            startActivity(intent)
         }
-        Log.d(tag, userId ?: "userId == null")
+    }
+
+    override fun onBackPressed() {
+        if (fragmentManager.backStackEntryCount == 0) {
+            super.onBackPressed()
+        } else {
+            fragmentManager.popBackStack()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true;
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.sign_out_settings -> finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     inner class FragmentAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-        val fragments = listOf(
-                MainFragment.newInstance(),
-                TicketListFragment.newInstance())
+        val fragments = mapOf<TabNames, Fragment>(
+                TabNames.MAIN.to(MainFragment.newInstance(userId)),
+                TabNames.HISTORY.to(TicketListFragment.newInstance())
+        )
 
-        override fun getItem(position: Int): Fragment = fragments[position]
+        override fun getItem(position: Int): Fragment = fragments.get(TabNames.values()[position])!!
 
         override fun getCount(): Int = fragments.size
+
+        override fun getPageTitle(position: Int): CharSequence = TabNames.values()[position].title
+
     }
+
+    fun <A, B> A.to(that: B): Pair<A, B> = Pair(this, that)
 
     fun <A, B, C> with(a: A, b: B, f: (A, B) -> C) = f(a, b)
 

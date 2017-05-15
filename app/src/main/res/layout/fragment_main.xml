@@ -1,51 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent"
-                                             android:background="@color/colorPrimaryDark">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/fromLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="from"/>
+
+        <TextView
+            android:id="@+id/from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fromLabel"
+            android:text="111"/>
+
+        <TextView
+            android:id="@+id/toLabel"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="to"/>
+
+        <TextView
+            android:id="@+id/to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toLabel"
+            android:layout_alignRight="@id/toLabel"
+            android:text="444"/>
+
+    </RelativeLayout>
+
+
+    <FrameLayout
+        android:layout_gravity="center"
+        android:layout_width="250dp"
+        android:layout_height="250dp">
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/gifImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/gif_sunshine"/>
+        <FrameLayout
+            android:background="@drawable/circle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </FrameLayout>
     <View
         android:id="@+id/gifBackground"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/colorAccent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-
-    <TextView
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="@string/main_from_default"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <TextView
-        android:id="@+id/to"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/main_to_default"
-        tools:layout_editor_absoluteY="16dp"
-        tools:layout_editor_absoluteX="275dp"/>
-
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <Button
         android:id="@+id/etaTime"
-        android:layout_width="200dp"
-        android:layout_height="0dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/circle_idle"
         android:elevation="14dp"
@@ -53,97 +74,8 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:visibility="visible"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/to"
-        app:layout_constraintHorizontal_bias="0.497"/>
-
-    <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/gifImage"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:src="@drawable/gif_sunshine"
-        app:layout_constraintLeft_toLeftOf="@+id/etaTime"
-        app:layout_constraintRight_toRightOf="@+id/etaTime"
-        app:layout_constraintTop_toBottomOf="@+id/etaTime"/>
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/separator"
-        android:layout_width="0dp"
-        android:layout_height="2dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        app:cardBackgroundColor="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/purchaseTicketButton"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gifImage"/>
+        android:visibility="visible"/>
 
 
-    <Button
-        android:id="@+id/viewTicketsButton"
-        android:layout_width="88dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="9dp"
-        android:background="@drawable/circle_tags"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintLeft_toLeftOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="@+id/thirdOptionButton"/>
 
-    <Button
-        android:id="@+id/purchaseTicketButton"
-        android:layout_width="88dp"
-        android:layout_height="0dp"
-        android:background="@drawable/circle_shopping_cart"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintRight_toRightOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/viewTicketsButton"/>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
-        android:ems="5"
-        android:gravity="center_horizontal"
-        android:text="@string/purchase_ticket_button_text"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView3"/>
-
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:ems="5"
-        android:gravity="center_horizontal"
-        android:text="@string/view_tickets_button_text"
-        app:layout_constraintLeft_toRightOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/textView2"/>
-
-    <Button
-        android:id="@+id/thirdOptionButton"
-        android:layout_width="88dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="36dp"
-        android:layout_marginTop="34dp"
-        android:background="@drawable/circle_map"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/gifImage"/>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:ems="5"
-        android:gravity="center_horizontal"
-        android:text="@string/map_bottom_text"
-        app:layout_constraintLeft_toRightOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/thirdOptionButton"/>
-
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

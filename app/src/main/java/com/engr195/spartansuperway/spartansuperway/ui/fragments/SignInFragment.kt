@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.engr195.spartansuperway.spartansuperway.R
 import com.engr195.spartansuperway.spartansuperway.data.etaStatusPickupUser
+import com.engr195.spartansuperway.spartansuperway.data.key_firebaseUid
 import com.engr195.spartansuperway.spartansuperway.ui.activities.LoginActivity
 import com.engr195.spartansuperway.spartansuperway.ui.activities.MainActivity
 import com.engr195.spartansuperway.spartansuperway.utils.showToast
@@ -77,7 +78,7 @@ class SignInFragment : Fragment() {
                             Log.d(tag, "signInWithEmail:onComplete:${taskResult.isSuccessful}")
                             val intent = Intent(activity, MainActivity::class.java)
                             val userId = FirebaseAuth.getInstance().currentUser?.uid
-                            userId?.let { intent.putExtra(MainActivity.key_firebaseUid, it) }
+                            userId?.let { intent.putExtra(key_firebaseUid, it) }
                             startActivity(intent)
                         } else {
                             Log.w(tag, "signInEmail:failed", taskResult.exception)
@@ -97,7 +98,7 @@ class SignInFragment : Fragment() {
                             val intent = Intent(activity, MainActivity::class.java)
                             val userId = FirebaseAuth.getInstance().currentUser?.uid
                             createTestTicket(userId)
-                            userId?.let { intent.putExtra(MainActivity.key_firebaseUid, it) }
+                            userId?.let { intent.putExtra(key_firebaseUid, it) }
                             startActivity(intent)
                         } else {
                             Log.w(tag, "signInEmail:failed", taskResult.exception)
