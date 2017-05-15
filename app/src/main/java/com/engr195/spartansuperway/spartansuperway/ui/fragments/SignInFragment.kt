@@ -10,7 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.engr195.spartansuperway.spartansuperway.R
-import com.engr195.spartansuperway.spartansuperway.data.etaStatusPickup
+import com.engr195.spartansuperway.spartansuperway.data.etaStatusPickupUser
 import com.engr195.spartansuperway.spartansuperway.ui.activities.LoginActivity
 import com.engr195.spartansuperway.spartansuperway.ui.activities.MainActivity
 import com.engr195.spartansuperway.spartansuperway.utils.showToast
@@ -86,10 +86,10 @@ class SignInFragment : Fragment() {
                     }
         }
 
-
         autoSignInButton.setOnClickListener {
-            val email = "test@gmail.com"
-            val password = "Test1234"
+            val email = "test@mail.com"
+            val password = "aaaallll"
+            Log.d(tag, "email: $email, password: $password")
             auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(parentActivity) { taskResult ->
                         if (taskResult.isSuccessful) {
@@ -121,7 +121,7 @@ class SignInFragment : Fragment() {
             database.child("from").setValue(fromLocation)
             database.child("to").setValue(toLocation)
             database.child("eta").setValue(eta)
-            database.child("status").setValue(etaStatusPickup)
+            database.child("status").setValue(etaStatusPickupUser)
             database.child("alive").setValue(true)
         }
     }

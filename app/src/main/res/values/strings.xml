@@ -19,6 +19,12 @@
     <string name="sign_up_account_text_view">Don\'t have an account? Sign up now.</string>
     <string name="sign_up_create_account_button">Create Account</string>
 
+    <!-- MainActivity -->
+    <string name="main_from_default"><b>From:</b> N/A</string>
+    <string name="main_to_default"><b>To:</b> N/A</string>
+    <string name="main_from_label"><b>From:</b> %1$s</string>
+    <string name="main_to_label"><b>To:</b> %1$s</string>
+
     <!-- MainFragment -->
     <string name="eta_button_text">Estimated time arrival...</string>
     <string name="purchase_ticket_button_text">Purchase</string>
@@ -45,7 +51,7 @@
     <string name="ticket_from_location_label">From:</string>
     <string name="ticket_to_location_label">To:</string>
 
-    // PurchaseTicketFragment
+    <!-- PurchaseTicketFragment -->
     <string name="purchase_ticket_from">From: </string>
     <string name="purchase_ticket_to">To: </string>
     <string name="station_1">Station 1</string>
