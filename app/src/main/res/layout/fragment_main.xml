@@ -42,22 +42,19 @@
     </RelativeLayout>
 
 
-    <FrameLayout
+    <com.engr195.spartansuperway.spartansuperway.ui.CircleFrameLayout
         android:layout_gravity="center"
         android:layout_width="250dp"
         android:layout_height="250dp">
 
         <pl.droidsonroids.gif.GifImageView
+            android:background="@drawable/circle"
             android:id="@+id/gifImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/gif_sunshine"/>
-        <FrameLayout
-            android:background="@drawable/circle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
 
-    </FrameLayout>
+    </com.engr195.spartansuperway.spartansuperway.ui.CircleFrameLayout>
     <View
         android:id="@+id/gifBackground"
         android:layout_width="match_parent"
