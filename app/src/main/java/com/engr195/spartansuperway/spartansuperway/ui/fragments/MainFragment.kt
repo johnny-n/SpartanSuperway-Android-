@@ -1,6 +1,7 @@
 package com.engr195.spartansuperway.spartansuperway.ui.fragments
 
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewAnimationUtils
 import android.view.ViewGroup
 import com.engr195.spartansuperway.spartansuperway.R
 import com.engr195.spartansuperway.spartansuperway.data.*
+import com.engr195.spartansuperway.spartansuperway.ui.activities.MainActivity
 import com.engr195.spartansuperway.spartansuperway.utils.SimpleChildEventListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -28,6 +30,8 @@ class MainFragment : Fragment() {
     var destLocation = 0
 
     companion object {
+
+
         val tag = MainFragment::class.java.simpleName
 
         fun newInstance(firebaseUid: String): Fragment {
@@ -42,6 +46,12 @@ class MainFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater?.inflate(R.layout.fragment_main, container, false)
 
+    object Typer {
+        fun type() {
+
+        }
+    }
+
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         userId = arguments.getString(key_firebaseUid)
@@ -50,13 +60,13 @@ class MainFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        etaTime.isEnabled = true
+        podButton.isEnabled = true
     }
 
     fun setupEtaAnimation() {
         if (etaAnimation == null) {
             etaAnimation = Runnable {
-                etaTime.animate()
+                podButton.animate()
                         .setDuration(animationDuration)
                         .alpha(0.6f)
                         .withEndAction {
@@ -68,12 +78,12 @@ class MainFragment : Fragment() {
 
     fun startEtaAnimation() {
         if (etaAnimation != null) {
-            etaTime.animate()
+            podButton.animate()
                     .setDuration(animationDuration)
                     .alpha(1.0f)
                     .withEndAction(etaAnimation)
         } else {
-            etaTime.alpha = 1.0f
+            podButton.alpha = 1.0f
         }
     }
 
@@ -102,6 +112,8 @@ class MainFragment : Fragment() {
                 Log.d("StatusCode", statusCode.toString())
                 Log.d("ETA Value", "eta = $etaValue")
 
+                from.text = "Station ${pickupLocation}"
+                to.text = "Station ${destLocation}"
                 updateEtaUi(pickupLocation, destLocation, statusCode, etaValue)
             }
         })
@@ -112,44 +124,71 @@ class MainFragment : Fragment() {
         val statusString = when (status) {
         // TODO: Finish updated status code drawable names
             etaStatusPickupUser -> {
-                updateGif(R.drawable.gif_pod_moving, R.color.white, 0)
-                setupEtaAnimation()
-                startEtaAnimation()
-
-                animationDuration = 500L
-                etaTime.background = resources.getDrawable(R.drawable.circle_green)
+                Handler().postDelayed(object : Runnable {
+                    override fun run() {
+                        updateGif(R.drawable.gif_pod_moving, R.color.purple, animDuration)
+//                        setupEtaAnimation()
+//                        startEtaAnimation()
+//                        animationDuration = 500L
+                        progressBar.visibility = View.VISIBLE
+                        (activity as MainActivity).showFabButton(false)
+                    }
+                }, 500)
                 "Your pod is on the way to pick you up."
             }
             etaStatusWaiting -> {
-                updateGif(R.drawable.gif_pod_waiting, android.R.color.holo_blue_light, animDuration)
+                updateGif(R.drawable.gif_pod_waiting, android.R.color.holo_green_light, animDuration)
                 setupEtaForDestination()
-                animationDuration = 1000L
-                etaTime.background = resources.getDrawable(R.drawable.circle_green)
-                etaTime.text = "Your pod here.\nPlease enter the vehicle."
-                return
+//                animationDuration = 1000L
+//                etaTime.background = resources.getDrawable(R.drawable.circle_green)
+                progressBar.visibility = View.GONE
+                podButton.text = "Enter vehicle"
+                podButton.animate()
+                        .scaleX(1f)
+                        .scaleY(1f)
+                        .setDuration(animDuration)
+                        .start()
+                "Your pod here.\nPlease enter the vehicle."
             }
             etaStatusDestination -> {
-                updateGif(R.drawable.gif_pod_moving, R.color.white, animDuration)
-                animationDuration = 500L
-                etaTime.background = resources.getDrawable(R.drawable.circle_green)
+
+                updateGif(R.drawable.gif_pod_moving, R.color.purple, animDuration)
+                progressBar.visibility = View.VISIBLE
+                podButton.animate()
+                        .scaleX(0f)
+                        .scaleY(0f)
+                        .setDuration(animDuration)
+                        .start()
                 "Your are on the way to to your destination."
             }
             etaStatusArrival -> {
-                updateGif(R.drawable.gif_pod_waiting, android.R.color.holo_blue_light, animDuration)
-                gifImage.setImageResource(R.drawable.gif_pod_waiting)
-                gifBackground.setBackgroundResource(android.R.color.holo_blue_light)
-                etaAnimation = null
-                etaTime.removeCallbacks(etaAnimation)
-                etaTime.background = resources.getDrawable(R.drawable.circle_yellow)
-                etaTime.text = "Your pod has arrived at your destination.\n"
-                completeEtaStatus()
-                return
+                updateGif(R.drawable.gif_pod_waiting, android.R.color.holo_green_light, animDuration)
+                progressBar.visibility = View.GONE
+                podButton.animate()
+                        .scaleX(1f)
+                        .scaleY(1f)
+                        .setDuration(animDuration)
+                        .start()
+                podButton.text = "Exit vehicle"
+//                etaAnimation = null
+//                podButton.removeCallbacks(etaAnimation)
+//                podButton.background = resources.getDrawable(R.drawable.circle_yellow)
+                setupEtaComplete()
+                "Your pod has arrived at your destination.\n Please Exit the vehicle\n"
             }
             etaStatusNoTicket -> {
-                updateGif(R.drawable.gif_sunshine, R.color.colorAccent, animDuration)
-                etaTime.background = resources.getDrawable(R.drawable.circle_idle)
-                etaTime.text = "No active ticket."
-                return
+                updateGif(R.drawable.gif_hello, R.color.colorNeutral, animDuration)
+                podButton.animate()
+                        .scaleX(0f)
+                        .scaleY(0f)
+                        .setDuration(animDuration)
+                        .start()
+                (activity as MainActivity).showFabButton(true)
+                from.text = "N/A"
+                to.text = "N/A"
+//                podButton.background = resources.getDrawable(R.drawable.circle_idle)
+//                podButton.text = "No active ticket."
+                "No ticket."
             }
             else -> "Error in pod status\n"
         }
@@ -158,8 +197,8 @@ class MainFragment : Fragment() {
                 "Destination: $destination\n\n" +
                 "$statusString\n\n" +
                 "ETA: $eta seconds"
-
-        etaTime.text = etaString
+        message.text = statusString
+//        etaTime.text = etaString
     }
 
     fun updateGif(gifResId: Int, gifBackgroundResId: Int, animDuration: Long) {
@@ -191,7 +230,7 @@ class MainFragment : Fragment() {
     }
 
     fun setupEtaForDestination() {
-        etaTime.setOnClickListener {
+        podButton.setOnClickListener {
             val database = FirebaseDatabase.getInstance()
                     .getReference()
                     .child("users")
@@ -202,13 +241,13 @@ class MainFragment : Fragment() {
             database.child("eta").setValue(10)
             database.child("status").setValue(etaStatusDestination)
             // TODO: Remove bug where onClickListener isn't removed with the line below
-            etaTime.setOnClickListener(null)
+            podButton.setOnClickListener(null)
         }
     }
 
     // TODO: Do something with this?
-    fun completeEtaStatus() {
-        etaTime.setOnClickListener {
+    fun setupEtaComplete() {
+        podButton.setOnClickListener {
             val database = FirebaseDatabase.getInstance()
                     .getReference()
                     .child("users")
@@ -217,15 +256,15 @@ class MainFragment : Fragment() {
 
             database.child("status").setValue(etaStatusNoTicket)
             // TODO: Remove bug where onClickListener isn't removed with the line below
-            etaTime.setOnClickListener(null)
-            etaTime.isEnabled = false
+            podButton.setOnClickListener(null)
+            podButton.isEnabled = false
         }
     }
 
     override fun onPause() {
         super.onPause()
         if (etaAnimation != null) {
-            etaTime.removeCallbacks(etaAnimation)
+            podButton.removeCallbacks(etaAnimation)
             etaAnimation = null
         }
     }
@@ -253,9 +292,21 @@ class MainFragment : Fragment() {
         }
     }
 
+    fun <A, B> A.to(that: B): Pair<A, B> = Pair(this, that)
+
     fun <A, B, C> with(a: A, b: B, f: (A, B) -> C) = f(a, b)
 
     inline fun <T> with(receiver: T, block: T.() -> Unit) {
         receiver.block()
+    }
+
+    inline fun <reified T> Iterable<*>.filterIsInstance(): List<T> {
+        val destination = mutableListOf<T>()
+        for (element in this) {
+            if (element is T) {
+                destination.add(element)
+            }
+        }
+        return destination
     }
 }

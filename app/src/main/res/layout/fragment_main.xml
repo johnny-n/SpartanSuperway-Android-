@@ -1,78 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
 
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/colorNeutral">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/fromLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="from"/>
-
-        <TextView
-            android:id="@+id/from"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/fromLabel"
-            android:text="111"/>
-
-        <TextView
-            android:id="@+id/toLabel"
-            android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="to"/>
-
-        <TextView
-            android:id="@+id/to"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/toLabel"
-            android:layout_alignRight="@id/toLabel"
-            android:text="444"/>
-
-    </RelativeLayout>
-
-
-    <com.engr195.spartansuperway.spartansuperway.ui.CircleFrameLayout
-        android:layout_gravity="center"
-        android:layout_width="250dp"
-        android:layout_height="250dp">
-
-        <pl.droidsonroids.gif.GifImageView
-            android:background="@drawable/circle"
-            android:id="@+id/gifImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/gif_sunshine"/>
-
-    </com.engr195.spartansuperway.spartansuperway.ui.CircleFrameLayout>
     <View
         android:id="@+id/gifBackground"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="@color/colorNeutral"
+        android:alpha=".3"
+        tools:background="@android:color/holo_purple"/>
 
-    <Button
-        android:id="@+id/etaTime"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/circle_idle"
-        android:elevation="14dp"
-        android:text="@string/eta_default_text"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:visibility="visible"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="32dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/fromLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="From: "
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N/A"/>
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/toLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="To: "
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N/A"/>
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <android.support.v4.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <com.engr195.spartansuperway.spartansuperway.ui.CircleFrameLayout
+            android:id="@+id/circleFrame"
+            android:layout_width="300dp"
+            android:layout_height="225dp"
+            android:layout_gravity="center">
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/gifImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:src="@drawable/gif_hello"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="375dp"
+                android:layout_height="375dp"
+                android:layout_gravity="center"
+                android:progress="50"
+                android:visibility="invisible"
+                tools:visibility="visible"/>
+
+        </com.engr195.spartansuperway.spartansuperway.ui.CircleFrameLayout>
+
+        <android.support.v4.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="12dp"
+            android:gravity="center"
+            android:text="Message"
+            android:textSize="20sp"/>
+
+        <Button
+            android:id="@+id/podButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/colorAccent"
+            android:elevation="5dp"
+            android:padding="20dp"
+            android:scaleX="0"
+            android:scaleY="0"
+            android:text="Enter/exit podcar"
+            android:textColor="@color/white"
+            tools:scaleX="1"
+            tools:scaleY="1"/>
+
+        <android.support.v4.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="3"/>
+    </LinearLayout>
+
+</FrameLayout>

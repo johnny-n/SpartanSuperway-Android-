@@ -49,7 +49,7 @@ class PaymentActivity: AppCompatActivity() {
 
             // Move button's container up (in scene that TransitionManager has yet to '.go()' to)
             square.animate()
-                    .translationY(-500f)
+                    .translationY(-250f)
                     .start()
             TransitionManager.go(ticketScene, AutoTransition())
             this.showToast("Ticket purchased!")

@@ -16,7 +16,6 @@ import com.engr195.spartansuperway.spartansuperway.ui.fragments.MainFragment
 import com.engr195.spartansuperway.spartansuperway.ui.fragments.TicketListFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-
 class MainActivity : AppCompatActivity() {
 
     enum class TabNames(val title: String) {
@@ -45,6 +44,15 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, PaymentActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    fun showFabButton(isVisible: Boolean) {
+        val scaleFactor = if (isVisible) 1f else 0f
+        fab.animate()
+                .scaleX(scaleFactor)
+                .scaleY(scaleFactor)
+                .setDuration(600L)
+                .start()
     }
 
     override fun onBackPressed() {

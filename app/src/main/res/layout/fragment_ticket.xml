@@ -22,40 +22,41 @@
 
             <LinearLayout
                 android:id="@+id/dateAndTime"
+                android:orientation="horizontal"
                 android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:text="@string/ticket_date_label"
-                    android:textStyle="bold"
-                    android:layout_marginRight="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/TicketText"/>
+                <!--<TextView-->
+                    <!--android:text="@string/ticket_date_label"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:layout_marginRight="5dp"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--style="@style/TicketText"/>-->
 
-                <TextView
-                    android:id="@+id/ticketDate"
-                    android:text="11/16/2016"
-                    android:layout_marginRight="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/TicketText"/>
+                <!--<TextView-->
+                    <!--android:id="@+id/ticketDate"-->
+                    <!--android:text="11/16/2016"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--style="@style/TicketText"/>-->
 
-                <TextView
-                    android:text="@string/ticket_time_label"
-                    android:textStyle="bold"
-                    android:layout_marginRight="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/TicketText"/>
+                <!--<TextView-->
+                    <!--android:text="@string/ticket_time_label"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:layout_marginRight="5dp"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--style="@style/TicketText"/>-->
 
-                <TextView
-                    android:id="@+id/ticketTime"
-                    android:text="3:15PM"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/TicketText"/>
+                <!--<TextView-->
+                    <!--android:id="@+id/ticketTime"-->
+                    <!--android:text="3:15PM"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--style="@style/TicketText"/>-->
 
             </LinearLayout>
 
