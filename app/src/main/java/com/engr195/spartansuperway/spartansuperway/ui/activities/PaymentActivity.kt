@@ -3,11 +3,13 @@ package com.engr195.spartansuperway.spartansuperway.ui.activities
 import android.app.AlertDialog
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.Handler
 import android.support.transition.AutoTransition
 import android.support.transition.Scene
 import android.support.transition.TransitionManager
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -17,11 +19,12 @@ import com.engr195.spartansuperway.spartansuperway.data.etaStatusPickupUser
 import com.engr195.spartansuperway.spartansuperway.utils.showToast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.dialog_select_station.view.*
 import kotlinx.android.synthetic.main.activity_payment.*
+import kotlinx.android.synthetic.main.dialog_select_station.view.*
 
 class PaymentActivity: AppCompatActivity() {
 
+    val tag = PaymentActivity::class.java.simpleName
     var dialog: AlertDialog? = null
     // TODO: Remove this later and work on 'TODO: Guard..' below
     var fromStationSelected = false
@@ -62,8 +65,7 @@ class PaymentActivity: AppCompatActivity() {
             val okButton = square.findViewById(R.id.okButton)
             okButton.setOnClickListener {
                 // Go back to MainActivity
-                createTestTicket()
-                finish()
+                createTestTicketAndFinish()
             }
         }
     }
@@ -98,12 +100,14 @@ class PaymentActivity: AppCompatActivity() {
         }
     }
 
-    fun createTestTicket() {
+    fun createTestTicketAndFinish() {
         val fromStation = fromStationTextView.text
         val toStation = toStationTextView.text
 
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         userId?.let {
+
+            Log.d(tag, "push to firebase")
             val database = FirebaseDatabase.getInstance()
                     .getReference()
                     .child("users")
@@ -116,6 +120,12 @@ class PaymentActivity: AppCompatActivity() {
             database.child("isNewTicket").setValue(true)
             database.child("timerOn").setValue(false)
         }
+
+        // TODO: Account for network delay to push data to Firebase.
+        // TODO: We do not want to finish the activity before this data is pushed to firebase
+        Handler().postDelayed(1000) {
+            finish()
+        }
     }
     /**
      * @param addToBackStack set to true if you want the "back" button to reverse this action
@@ -127,6 +137,10 @@ class PaymentActivity: AppCompatActivity() {
             transaction.addToBackStack(null)
         }
         transaction.replace(R.id.fragment_container, fragment).commit()
+    }
+
+    fun Handler.postDelayed(duration: Long, runnable: () -> Unit) {
+        this.postDelayed(runnable, duration)
     }
 
 }
